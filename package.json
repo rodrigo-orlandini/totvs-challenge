@@ -17,6 +17,7 @@
     "db:migrate": "prisma migrate dev",
     "db:migrate:test": "DATABASE_URL=$TEST_DATABASE_URL prisma migrate deploy",
     "db:generate": "prisma generate",
+    "db:seed": "node prisma/seed.mjs",
     "db:studio": "prisma studio"
   },
   "dependencies": {
@@ -42,5 +43,8 @@
     "tsx": "^4.0.0",
     "typescript": "^5.0.0",
     "vitest": "^2.0.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.mjs"
   }
 }
