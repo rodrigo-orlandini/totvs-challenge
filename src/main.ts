@@ -1,8 +1,15 @@
 import 'reflect-metadata'
+import { registerCatalogModule } from '@modules/catalog/container'
+import { buildApp } from '@infra/http/server'
 
 async function bootstrap(): Promise<void> {
-  // composition root: registrar containers e inicializar Fastify
-  // implementação pendente
+  registerCatalogModule()
+  const app = await buildApp()
+  const port = Number(process.env.PORT ?? 3000)
+  await app.listen({ port, host: '0.0.0.0' })
 }
 
-bootstrap().catch(console.error)
+bootstrap().catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
