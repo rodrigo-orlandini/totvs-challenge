@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id        String      @id @default(uuid())
+  sku       String      @unique
+  name      String
+  price     Decimal     @db.Decimal(10, 2)
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+  stockFlow StockFlow[]
+
+  @@map("products")
+}
+
+model StockFlow {
+  id        String   @id @default(uuid())
+  productId String   @map("product_id")
+  quantity  Int
+  movedAt   DateTime @default(now()) @map("moved_at")
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("stock_flows")
+}
