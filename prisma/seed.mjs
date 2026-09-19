@@ -92,7 +92,7 @@ async function main() {
   const stockFlows = products.map((p) => ({
     id: randomUUID(),
     productId: p.id,
-    quantity: Math.floor(Math.random() * 200) + 10,
+    quantity: Math.floor(Math.random() * 191) + 10,
     movedAt: new Date(),
   }))
 
