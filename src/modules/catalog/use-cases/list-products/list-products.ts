@@ -7,7 +7,7 @@ import type { ListProductsInput, ListProductsOutput } from '../../dtos/list-prod
 
 @injectable()
 export class ListProductsUseCase
-  implements IUseCase<ListProductsInput, Promise<Either<DomainError, ListProductsOutput>>>
+  implements IUseCase<ListProductsInput, Either<DomainError, ListProductsOutput>>
 {
   constructor(
     @inject('IProductRepository') private readonly productRepository: IProductRepository,
