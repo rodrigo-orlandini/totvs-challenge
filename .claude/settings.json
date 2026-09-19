@@ -1,0 +1,5 @@
+{
+  "enabledPlugins": {
+    "clean-architecture@clean-architecture-skills": true
+  }
+}
