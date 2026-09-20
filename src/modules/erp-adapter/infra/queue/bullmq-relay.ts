@@ -44,7 +44,7 @@ export class BullMQRelay {
           this.queue.add(
             `${entry.entity}:${entry.erpId}`,
             { entity: entry.entity, erpId: entry.erpId, payload: entry.payload, correlationId: entry.id },
-            { jobId: `${entry.entity}:${entry.erpId}` },
+            { jobId: entry.id },
           )
         )
       )
