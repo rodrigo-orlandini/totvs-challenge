@@ -13,6 +13,10 @@ export default defineConfig({
     poolOptions: {
       forks: { singleFork: true },
     },
+    env: {
+      DATABASE_URL: 'postgresql://postgres:postgres@localhost:5433/casecellshop_test',
+      REDIS_URL: 'redis://localhost:6380',
+    },
   },
   resolve: {
     alias: {

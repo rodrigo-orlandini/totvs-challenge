@@ -12,8 +12,9 @@ export class BullMQRelay {
     private readonly outboxRepository: IOutboxRepository,
     redisConnection: Redis,
     private readonly intervalMs: number = Number(process.env.RELAY_INTERVAL_MS ?? 1500),
+    queueName: string = 'erp-sync',
   ) {
-    this.queue = new Queue('erp-sync', {
+    this.queue = new Queue(queueName, {
       connection: redisConnection,
       defaultJobOptions: {
         attempts: Number(process.env.SYNC_JOB_ATTEMPTS ?? 5),
