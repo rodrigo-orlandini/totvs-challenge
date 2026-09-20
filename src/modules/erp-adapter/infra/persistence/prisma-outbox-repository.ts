@@ -15,7 +15,7 @@ export class PrismaOutboxRepository implements IOutboxRepository {
         INSERT INTO outbox (id, entity, erp_id, payload, status, created_at)
         VALUES (gen_random_uuid(), 'product', ${p.id}, ${JSON.stringify(p)}::jsonb, 'PENDING', now())
         ON CONFLICT (entity, erp_id)
-        DO UPDATE SET payload = EXCLUDED.payload, status = 'PENDING'
+        DO UPDATE SET payload = EXCLUDED.payload, status = 'PENDING', attempts = 0, error = NULL
         WHERE outbox.status != 'PROCESSED' OR outbox.payload::text != EXCLUDED.payload::text
       `
     }

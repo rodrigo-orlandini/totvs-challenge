@@ -13,6 +13,7 @@ export class InMemoryOutboxRepository implements IOutboxRepository {
       if (existing) {
         existing.payload = p as unknown as Record<string, unknown>
         existing.status = 'PENDING'
+        existing.attempts = 0
       } else {
         this.entries.push({
           id: randomUUID(),
