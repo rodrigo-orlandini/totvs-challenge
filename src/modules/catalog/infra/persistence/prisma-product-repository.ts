@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe'
 import type { PrismaClient } from '@prisma/client'
-import type { IProductRepository, FindAllParams, FindAllResult } from '../../repositories/i-product-repository'
+import type { IProductRepository, FindAllParams, FindAllResult } from '../../repositories/product-repository'
 
 @injectable()
 export class PrismaProductRepository implements IProductRepository {

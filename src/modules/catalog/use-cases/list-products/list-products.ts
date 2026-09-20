@@ -2,7 +2,7 @@ import { injectable, inject } from 'tsyringe'
 import { type Either, right } from '@shared/core/either'
 import type { IUseCase } from '@shared/core/use-case'
 import type { DomainError } from '@shared/errors/domain-error'
-import type { IProductRepository } from '../../repositories/i-product-repository'
+import type { IProductRepository } from '../../repositories/product-repository'
 import type { ListProductsInput, ListProductsOutput } from '../../dtos/list-products-dto'
 
 @injectable()

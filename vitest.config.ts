@@ -24,7 +24,7 @@ export default defineConfig({
         'src/shared/types/pagination.ts',
         'src/shared/core/use-case.ts',
         'src/modules/catalog/dtos/list-products-dto.ts',
-        'src/modules/catalog/repositories/i-product-repository.ts',
+        'src/modules/catalog/repositories/product-repository.ts',
       ],
       thresholds: {
         branches: 80,

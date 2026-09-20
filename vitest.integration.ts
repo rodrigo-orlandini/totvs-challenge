@@ -5,6 +5,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
+    setupFiles: ['reflect-metadata'],
     include: ['src/**/*.integration-spec.ts'],
     hookTimeout: 30000,
     testTimeout: 30000,

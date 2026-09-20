@@ -1,5 +1,5 @@
 import { container } from 'tsyringe'
-import type { IProductRepository } from './repositories/i-product-repository'
+import type { IProductRepository } from './repositories/product-repository'
 import { PrismaProductRepository } from './infra/persistence/prisma-product-repository'
 import { ListProductsUseCase } from './use-cases/list-products/list-products'
 import { ProductController } from './infra/http/product-controller'

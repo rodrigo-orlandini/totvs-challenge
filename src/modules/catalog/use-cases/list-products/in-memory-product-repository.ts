@@ -1,4 +1,4 @@
-import type { IProductRepository, FindAllParams, FindAllResult } from '../../repositories/i-product-repository'
+import type { IProductRepository, FindAllParams, FindAllResult } from '../../repositories/product-repository'
 import type { ProductResponseItem } from '../../dtos/list-products-dto'
 
 export class InMemoryProductRepository implements IProductRepository {
