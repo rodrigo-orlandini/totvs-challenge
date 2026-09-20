@@ -4,6 +4,11 @@ import type { FastifyRequest, FastifyReply } from 'fastify'
 import { randomUUID } from 'node:crypto'
 import { container } from 'tsyringe'
 import { ProductController } from '@modules/catalog/infra/http/product-controller'
+import { createBullBoard } from '@bull-board/api'
+import { BullMQAdapter } from '@bull-board/api/bullMQAdapter'
+import { FastifyAdapter as BullBoardFastifyAdapter } from '@bull-board/fastify'
+import { Queue } from 'bullmq'
+import Redis from 'ioredis'
 
 export async function buildApp(): Promise<FastifyInstance> {
   const app = FastifyModule.fastify({
@@ -26,6 +31,13 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   const productController = container.resolve(ProductController)
   await productController.registerRoutes(app)
+
+  const redis = new Redis({ host: process.env.REDIS_HOST ?? 'localhost', port: 6379, maxRetriesPerRequest: null })
+  const erpSyncQueue = new Queue('erp-sync', { connection: redis })
+  const serverAdapter = new BullBoardFastifyAdapter()
+  serverAdapter.setBasePath('/admin/queues')
+  createBullBoard({ queues: [new BullMQAdapter(erpSyncQueue)], serverAdapter })
+  await app.register(serverAdapter.registerPlugin(), { prefix: '/admin/queues' })
 
   return app
 }

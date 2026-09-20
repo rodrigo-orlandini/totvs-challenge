@@ -1,7 +1,19 @@
 import { PrismaClient } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 
-const prisma = new PrismaClient()
+const target = process.argv.includes('--target')
+  ? process.argv[process.argv.indexOf('--target') + 1]
+  : 'main'
+
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: target === 'erp'
+        ? process.env.ERP_DATABASE_URL
+        : process.env.DATABASE_URL,
+    },
+  },
+})
 
 const BRANDS = {
   Apple: ['iPhone 15 Pro', 'iPhone 15', 'iPhone 14 Pro', 'iPhone 14', 'iPhone 13'],
