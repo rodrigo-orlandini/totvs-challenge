@@ -146,7 +146,5 @@ jobs:
       - run: npx prisma db push --skip-generate
       - name: Push ERP schema
         run: DATABASE_URL=$ERP_DATABASE_URL npx prisma db push --skip-generate
-      - name: Run unit tests with coverage
-        run: npx vitest run --coverage --coverage.reporter=json
-      - name: Run integration tests with coverage (merged)
-        run: npx vitest run --config vitest.integration.ts --coverage --coverage.reporter=json --coverage.mergeWith=./coverage/coverage-final.json
+      - name: Run all tests with coverage
+        run: npx vitest run --config vitest.coverage.ts --coverage
