@@ -15,7 +15,7 @@ export class PrismaProductRepository implements IProductRepository {
       this.prisma.product.findMany({
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' },
+        orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
         include: {
           stockFlow: { select: { quantity: true } },
         },

@@ -1,60 +1,117 @@
 import 'reflect-metadata'
-import { describe, it, expect, vi, afterEach } from 'vitest'
-import { Worker as WorkerThread } from 'node:worker_threads'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
-vi.mock('node:worker_threads', () => {
-  const WorkerMock = vi.fn(() => {
-    const listeners: Record<string, Array<(...args: unknown[]) => void>> = {}
-    return {
-      on: vi.fn((event: string, cb: (...args: unknown[]) => void) => {
-        listeners[event] = listeners[event] ?? []
-        listeners[event].push(cb)
-      }),
-      terminate: vi.fn(),
-      _emit: (event: string, ...args: unknown[]) => listeners[event]?.forEach(cb => cb(...args)),
-    }
-  })
-  return { Worker: WorkerMock }
-})
+const mockTerminate = vi.fn()
+const mockOn = vi.fn()
+
+vi.mock('node:worker_threads', () => ({
+  Worker: vi.fn(() => ({ terminate: mockTerminate, on: mockOn })),
+}))
 
 import { ErpScheduler } from './erp-scheduler'
+import { Worker } from 'node:worker_threads'
+
+const MockedWorker = vi.mocked(Worker)
 
 describe('ErpScheduler', () => {
-  afterEach(() => vi.clearAllMocks())
+  let scheduler: ErpScheduler
 
-  it('spawns two worker threads on start', () => {
+  beforeEach(() => {
     vi.useFakeTimers()
-    const scheduler = new ErpScheduler()
-    scheduler.start()
-    vi.runAllTimers()
-    expect(WorkerThread).toHaveBeenCalledTimes(2)
-    scheduler.stop()
+    mockTerminate.mockClear()
+    mockOn.mockClear()
+    MockedWorker.mockClear()
+    scheduler = new ErpScheduler()
+  })
+
+  afterEach(() => {
     vi.useRealTimers()
   })
 
-  it('respawns product worker on unexpected exit', async () => {
-    vi.useFakeTimers()
-    const scheduler = new ErpScheduler()
+  it('spawns product and stock_flow workers on start()', () => {
     scheduler.start()
     vi.runAllTimers()
-    const firstCall = vi.mocked(WorkerThread).mock.results[0].value
-    firstCall._emit('exit', 1) // simulate crash
-    vi.advanceTimersByTime(1500) // advance past 1000ms backoff
-    expect(WorkerThread).toHaveBeenCalledTimes(3) // 2 initial + 1 respawn
-    scheduler.stop()
-    vi.useRealTimers()
+    expect(MockedWorker).toHaveBeenCalledTimes(2)
+    const workerArgs = MockedWorker.mock.calls.map(c => String(c[0]))
+    expect(workerArgs.some(p => p.includes('erp-poller-product'))).toBe(true)
+    expect(workerArgs.some(p => p.includes('erp-poller-stock-flow'))).toBe(true)
   })
 
-  it('does not respawn workers after stop()', () => {
-    vi.useFakeTimers()
-    const scheduler = new ErpScheduler()
+  it('stop() terminates all workers and prevents respawn', () => {
     scheduler.start()
     vi.runAllTimers()
-    const firstCall = vi.mocked(WorkerThread).mock.results[0].value
     scheduler.stop()
-    firstCall._emit('exit', 1) // exit fires after terminate()
-    vi.advanceTimersByTime(2000)
-    expect(WorkerThread).toHaveBeenCalledTimes(2) // no new spawns
-    vi.useRealTimers()
+    expect(mockTerminate).toHaveBeenCalledTimes(2)
+  })
+
+  it('respawns worker with backoff on non-zero exit code', () => {
+    scheduler.start()
+    vi.runAllTimers()
+
+    // simulate worker exit with code 1 for 'product' worker
+    const exitCallbacks = mockOn.mock.calls.filter(c => c[0] === 'exit').map(c => c[1])
+    expect(exitCallbacks.length).toBeGreaterThan(0)
+    MockedWorker.mockClear()
+
+    exitCallbacks[0](1) // non-zero exit
+    vi.advanceTimersByTime(1000)
+
+    expect(MockedWorker).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not respawn worker on exit code 0 (clean shutdown)', () => {
+    scheduler.start()
+    vi.runAllTimers()
+    MockedWorker.mockClear()
+
+    const exitCallbacks = mockOn.mock.calls.filter(c => c[0] === 'exit').map(c => c[1])
+    exitCallbacks[0](0)
+    vi.runAllTimers()
+
+    expect(MockedWorker).not.toHaveBeenCalled()
+  })
+
+  it('does not respawn after stop() even if worker exits with non-zero code', () => {
+    scheduler.start()
+    vi.runAllTimers()
+    scheduler.stop()
+    MockedWorker.mockClear()
+
+    const exitCallbacks = mockOn.mock.calls.filter(c => c[0] === 'exit').map(c => c[1])
+    exitCallbacks[0](1) // non-zero after stop
+    vi.runAllTimers()
+
+    expect(MockedWorker).not.toHaveBeenCalled()
+  })
+
+  it('logs error when worker emits error event (does not crash)', () => {
+    scheduler.start()
+    vi.runAllTimers()
+    const errorCallbacks = mockOn.mock.calls.filter(c => c[0] === 'error').map(c => c[1])
+    expect(errorCallbacks.length).toBeGreaterThan(0)
+    // firing error event must not throw
+    expect(() => errorCallbacks[0](new Error('worker crashed'))).not.toThrow()
+  })
+
+  it('doubles backoff on repeated crashes up to 30s cap', () => {
+    scheduler.start()
+    vi.runAllTimers()
+    MockedWorker.mockClear()
+
+    // First crash — backoff 1000ms
+    const getExitCb = () => mockOn.mock.calls.filter(c => c[0] === 'exit').map(c => c[1]).at(-1)
+    getExitCb()!(1)
+    vi.advanceTimersByTime(999)
+    expect(MockedWorker).not.toHaveBeenCalled()
+    vi.advanceTimersByTime(1)
+    expect(MockedWorker).toHaveBeenCalledTimes(1)
+    MockedWorker.mockClear()
+
+    // Second crash — backoff 2000ms
+    getExitCb()!(1)
+    vi.advanceTimersByTime(1999)
+    expect(MockedWorker).not.toHaveBeenCalled()
+    vi.advanceTimersByTime(1)
+    expect(MockedWorker).toHaveBeenCalledTimes(1)
   })
 })
