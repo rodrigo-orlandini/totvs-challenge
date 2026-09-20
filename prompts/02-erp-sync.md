@@ -76,5 +76,3 @@ Implementação completa em 9 tasks via Subagent-Driven Development. Commits `36
 | I6 | Re-PENDING não resetava `attempts`/`error` — ciclo novo com estado stale | `ON CONFLICT DO UPDATE SET attempts = 0, error = NULL` |
 | I7 | `BullMQRelay`, `BullMQSyncWorker`, `ErpScheduler` instanciados com `new` em `main.ts` | Registrados em `erp-adapter/container.ts` via `useFactory`; `main.ts` usa `container.resolve` |
 | I8 | Token `'PrismaClient'` só em `catalog/container.ts` — erp-adapter dependia de ordem de registro | `src/shared/container.ts` (`registerSharedInfra`) centraliza ambos os tokens Prisma |
-
-**Decisão sobre teste de integração do relay (Task 7):** código verificado correto pelo revisor. Ambiente Docker indisponível não é defeito de código. Teste adiado para quando Docker estiver disponível — não bloqueou merge da branch.
