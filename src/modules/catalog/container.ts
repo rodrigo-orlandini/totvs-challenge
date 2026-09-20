@@ -6,7 +6,6 @@ import { ProductController } from './infra/http/product-controller'
 import { prisma } from '@shared/database/prisma-client'
 
 export function registerCatalogModule(): void {
-  container.register('PrismaClient', { useValue: prisma })
   container.register<IProductRepository>('IProductRepository', {
     useValue: new PrismaProductRepository(prisma),
   })

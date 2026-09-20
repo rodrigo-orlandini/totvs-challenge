@@ -11,15 +11,18 @@ import { PrismaCatalogStockFlowWriteRepository } from './infra/persistence/prism
 import { PollErpProductsUseCase } from './use-cases/poll-erp-products/poll-erp-products'
 import { PollErpStockFlowsUseCase } from './use-cases/poll-erp-stock-flows/poll-erp-stock-flows'
 import { ProcessSyncJobUseCase } from './use-cases/process-sync-job/process-sync-job'
+import { BullMQRelay } from './infra/queue/bullmq-relay'
+import { BullMQSyncWorker } from './infra/queue/bullmq-sync-worker'
+import { ErpScheduler } from './infra/scheduler/erp-scheduler'
 import type { IOutboxRepository } from './repositories/outbox-repository'
 import type { ISyncCursorRepository } from './repositories/sync-cursor-repository'
 import type { IErpProductRepository } from './repositories/erp-product-repository'
 import type { IErpStockFlowRepository } from './repositories/erp-stock-flow-repository'
 import type { ICatalogProductWriteRepository } from './repositories/catalog-product-write-repository'
 import type { ICatalogStockFlowWriteRepository } from './repositories/catalog-stock-flow-write-repository'
+import type { Redis } from 'ioredis'
 
-export function registerErpAdapterModule(): void {
-  container.register('ErpPrismaClient', { useValue: erpPrisma })
+export function registerErpAdapterModule(redis: Redis): void {
 
   container.register<IOutboxRepository>('IOutboxRepository', {
     useValue: new PrismaOutboxRepository(prisma),
@@ -60,5 +63,22 @@ export function registerErpAdapterModule(): void {
       container.resolve<ICatalogStockFlowWriteRepository>('ICatalogStockFlowWriteRepository'),
       container.resolve<IOutboxRepository>('IOutboxRepository'),
     ),
+  })
+
+  container.register(BullMQRelay, {
+    useFactory: () => new BullMQRelay(
+      container.resolve<IOutboxRepository>('IOutboxRepository'),
+      redis,
+    ),
+  })
+  container.register(BullMQSyncWorker, {
+    useFactory: () => new BullMQSyncWorker(
+      container.resolve(ProcessSyncJobUseCase),
+      container.resolve<IOutboxRepository>('IOutboxRepository'),
+      redis,
+    ),
+  })
+  container.register(ErpScheduler, {
+    useFactory: () => new ErpScheduler(),
   })
 }
