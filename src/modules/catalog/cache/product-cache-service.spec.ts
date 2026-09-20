@@ -213,6 +213,11 @@ describe('ProductCacheService', () => {
       redis.zcard.mockResolvedValue(0)
       expect(await cache.getTotal()).toBeNull()
     })
+
+    it('returns null and does not throw when Redis throws', async () => {
+      redis.zcard.mockRejectedValue(new Error('NOCONN'))
+      expect(await cache.getTotal()).toBeNull()
+    })
   })
 
   describe('setRedisIds', () => {
