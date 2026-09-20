@@ -14,11 +14,12 @@ async function bootstrap(): Promise<void> {
   registerCatalogModule()
   registerErpAdapterModule()
 
-  const app = await buildApp()
+  const redisUrl = new URL(process.env.REDIS_URL ?? 'redis://localhost:6379')
+  const redis = new Redis({ host: redisUrl.hostname, port: Number(redisUrl.port) || 6379, maxRetriesPerRequest: null })
+
+  const app = await buildApp(redis)
   const port = Number(process.env.PORT ?? 3000)
   await app.listen({ port, host: '0.0.0.0' })
-
-  const redis = new Redis({ host: process.env.REDIS_HOST ?? 'localhost', port: 6379, maxRetriesPerRequest: null })
   const outboxRepo = container.resolve<IOutboxRepository>('IOutboxRepository')
   const processUseCase = container.resolve(ProcessSyncJobUseCase)
 
