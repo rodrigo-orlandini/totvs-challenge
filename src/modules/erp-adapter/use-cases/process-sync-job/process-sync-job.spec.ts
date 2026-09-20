@@ -45,4 +45,12 @@ describe('ProcessSyncJobUseCase', () => {
     await useCase.execute({ entity: 'stock_flow', erpId: 'sf-1', payload, correlationId: 'corr-3' })
     expect(stockFlowRepo.created).toHaveLength(1)
   })
+
+  it('returns left(SyncProcessingError) when repo throws', async () => {
+    productRepo.upsert = async () => { throw new Error('DB connection failed') }
+    const payload = { id: 'erp-1', sku: 'SKU-001', name: 'Capa', price: 49.9, updated_at: '2026-01-01T00:00:00Z' }
+    const result = await useCase.execute({ entity: 'product', erpId: 'erp-1', payload, correlationId: 'corr-4' })
+    expect(result.isFailure()).toBe(true)
+    expect(result.value).toMatchObject({ code: 'SYNC_PROCESSING_ERROR' })
+  })
 })

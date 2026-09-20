@@ -2,6 +2,7 @@ import { Worker } from 'bullmq'
 import type { Redis } from 'ioredis'
 import type { ProcessSyncJobUseCase } from '../../use-cases/process-sync-job/process-sync-job'
 import type { IOutboxRepository } from '../../repositories/outbox-repository'
+import type { SyncJobPayload } from '../../dtos/sync-job-dto'
 import { logger } from '@shared/observability/logger'
 
 export class BullMQSyncWorker {
@@ -14,7 +15,7 @@ export class BullMQSyncWorker {
   ) {}
 
   start(): void {
-    this.worker = new Worker(
+    this.worker = new Worker<SyncJobPayload>(
       'erp-sync',
       async (job) => {
         const { entity, erpId, payload, correlationId } = job.data
@@ -29,7 +30,14 @@ export class BullMQSyncWorker {
       if (!job) return
       const maxAttempts = Number(job.opts.attempts ?? 5)
       if (job.attemptsMade >= maxAttempts) {
-        await this.outboxRepository.markDead(job.data.entity, job.data.erpId, err.message, job.attemptsMade)
+        try {
+          await this.outboxRepository.markDead(job.data.entity, job.data.erpId, err.message, job.attemptsMade)
+        } catch (markErr) {
+          logger.error(
+            { jobId: job.id, entity: job.data.entity, erpId: job.data.erpId, err: markErr },
+            'erp.sync.markdead.error',
+          )
+        }
         logger.error(
           { jobId: job.id, entity: job.data.entity, erpId: job.data.erpId, totalAttempts: job.attemptsMade, finalError: err.message },
           'erp.sync.dead',

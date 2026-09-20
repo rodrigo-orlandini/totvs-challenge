@@ -35,7 +35,6 @@ export default defineConfig({
         'src/modules/erp-adapter/infra/queue/bullmq-sync-worker.ts',
         'src/modules/erp-adapter/infra/scheduler/erp-poller-product.worker.ts',
         'src/modules/erp-adapter/infra/scheduler/erp-poller-stock-flow.worker.ts',
-        'src/modules/erp-adapter/infra/scheduler/erp-scheduler.ts',
         'src/modules/erp-adapter/container.ts',
         'src/shared/database/erp-prisma-client.ts',
       ],

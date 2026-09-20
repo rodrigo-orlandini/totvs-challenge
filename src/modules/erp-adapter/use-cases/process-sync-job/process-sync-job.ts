@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { injectable, inject } from 'tsyringe'
-import { type Either, right } from '@shared/core/either'
+import { type Either, right, left } from '@shared/core/either'
 import type { IUseCase } from '@shared/core/use-case'
 import type { DomainError } from '@shared/errors/domain-error'
 import type { ICatalogProductWriteRepository } from '../../repositories/catalog-product-write-repository'
@@ -9,6 +9,7 @@ import type { IOutboxRepository } from '../../repositories/outbox-repository'
 import { logger } from '@shared/observability/logger'
 import { tracer } from '@shared/observability/tracer'
 import type { SyncEntity } from '../../dtos/sync-job-dto'
+import { SyncProcessingError } from '../../errors/sync-processing-error'
 
 export interface ProcessSyncJobInput {
   entity: SyncEntity
@@ -57,6 +58,11 @@ export class ProcessSyncJobUseCase
       logger.info({ correlationId, entity, erpId }, 'erp.sync.processed')
       span.setAttribute('status', 'processed')
       return right(undefined)
+    } catch (err) {
+      const cause = err instanceof Error ? err.message : String(err)
+      logger.error({ correlationId, entity, erpId, cause }, 'erp.sync.process.error')
+      span.setAttribute('status', 'error')
+      return left(new SyncProcessingError(entity, erpId, cause))
     } finally {
       span.end()
     }

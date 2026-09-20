@@ -52,6 +52,8 @@ export class BullMQRelay {
 
       await this.outboxRepository.markEnqueued(pending.map(e => e.id))
       logger.info({ count: pending.length, durationMs: Date.now() - start }, 'erp.relay.batch')
+    } catch (err) {
+      logger.error({ err }, 'erp.relay.batch.error')
     } finally {
       span.end()
     }
