@@ -1,0 +1,934 @@
+{
+  "nodes": [
+    {
+      "id": "claude_agents_arch_reviewer_agent",
+      "label": "Arch Reviewer Agent",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\agents\\arch-reviewer.md",
+      "source_location": "1-61",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_agents_tdd_agent_agent",
+      "label": "TDD Agent",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\agents\\tdd-agent.md",
+      "source_location": "1-82",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_skills_domain_modeler_skill",
+      "label": "Domain Modeler Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\domain-modeler\\SKILL.md",
+      "source_location": "1-68",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_skills_improve_codebase_architecture_skill",
+      "label": "Improve Codebase Architecture Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\improve-codebase-architecture\\SKILL.md",
+      "source_location": "1-72",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_skills_observability_enforcer_skill",
+      "label": "Observability Enforcer Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\observability-enforcer\\SKILL.md",
+      "source_location": "1-46",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_skills_session_start_skill",
+      "label": "Session Start Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md",
+      "source_location": "1-41",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_skills_tdd_skill",
+      "label": "TDD Skill",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\tdd\\SKILL.md",
+      "source_location": "1-29",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "context_md_domain_glossary",
+      "label": "Domain Glossary (CONTEXT.md)",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CONTEXT.md",
+      "source_location": "1-31",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "claude_md_project_instructions",
+      "label": "Project Instructions (CLAUDE.md)",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CLAUDE.md",
+      "source_location": "1-14",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docker_compose_yml_infra",
+      "label": "Docker Compose Dev Infrastructure",
+      "file_type": "code",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docker-compose.yml",
+      "source_location": "1-68",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docker_compose_test_yml_infra",
+      "label": "Docker Compose Test Infrastructure",
+      "file_type": "code",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docker-compose.test.yml",
+      "source_location": "1-42",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_19_vitrine_inicial_get_products_plan",
+      "label": "Implementation Plan: GET /products (Vitrine Inicial)",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\plans\\2026-09-19-vitrine-inicial-get-products.md",
+      "source_location": "1-30",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_plans_2026_09_20_erp_sync_plan",
+      "label": "Implementation Plan: ERP Sync",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\plans\\2026-09-20-erp-sync.md",
+      "source_location": "1-30",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "label": "Architecture Spec: Modular Monolith with Clean Architecture",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-19-modular-monolith-clean-architecture-design.md",
+      "source_location": "1-100",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_09_20_erp_sync_design_spec",
+      "label": "Architecture Spec: ERP Sync (Transactional Outbox + BullMQ)",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": "1-100",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "label": "Prompt 00: Architectural Structure and Development Flow",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "1-47",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prompts_01_vitrine_inicial_prompt",
+      "label": "Prompt 01: Vitrine Inicial (GET /products)",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\01-vitrine-inicial.md",
+      "source_location": "1-31",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prompts_02_erp_sync_prompt",
+      "label": "Prompt 02: ERP Sync",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\02-erp-sync.md",
+      "source_location": "1-81",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "prompts_claude_md_convention",
+      "label": "Prompts Directory Convention",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\CLAUDE.md",
+      "source_location": "1-28",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "src_shared_core_architecture_rules_rules",
+      "label": "Architecture Rules Checklist",
+      "file_type": "document",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\src\\shared\\core\\architecture-rules.md",
+      "source_location": "1-47",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "clean_architecture_pattern",
+      "label": "Clean Architecture Pattern",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-19-modular-monolith-clean-architecture-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Monolito modular estruturado para migração futura a microsserviços sem retrabalho; cada módulo encapsula entities, use-cases, repositories, infra, mappers, presenters com regra de dependência inviolável"
+    },
+    {
+      "id": "transactional_outbox_pattern",
+      "label": "Transactional Outbox Pattern",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Garante que a detecção do ERP e o enfileiramento na fila sejam atômicos; se o processo cair antes do COMMIT o cursor não avança e o próximo ciclo redetecta — sem mensagens fantasma"
+    },
+    {
+      "id": "either_pattern",
+      "label": "Either<DomainError, T> Error Handling Pattern",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\src\\shared\\core\\architecture-rules.md",
+      "source_location": "15-18",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Todo use-case retorna Either<DomainError, T> — nenhuma exceção não tratada chega ao cliente; controllers fazem match no Either e delegam ao presenter (right) ou ao http-error-mapper (left)"
+    },
+    {
+      "id": "bullmq_technology",
+      "label": "BullMQ Queue Technology",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Escolhido sobre NATS porque usa Redis já presente no stack, tem suporte nativo a retry com backoff exponencial, DLQ (failed queue), deduplication por jobId e Bull Board para monitoramento — sem código extra"
+    },
+    {
+      "id": "cursor_based_polling",
+      "label": "Cursor-Based ERP Polling Strategy",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "WHERE updatedAt > lastSyncedAt traz apenas delta — poll full a cada 5s em tabela grande seria custoso; cursor armazenado em sync_cursors persiste entre restarts"
+    },
+    {
+      "id": "tdd_red_green_refactor",
+      "label": "TDD Red-Green-Refactor Cycle",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\tdd\\SKILL.md",
+      "source_location": "18-26",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Tests verify behavior through public interfaces and must survive refactors; forbidden patterns: implementation-coupled tests, tautological assertions, horizontal slicing"
+    },
+    {
+      "id": "catalog_module_concept",
+      "label": "Catalog Module — Product Vitrine",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CONTEXT.md",
+      "source_location": "16",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "checkout_module_concept",
+      "label": "Checkout Module — Async Order Processing",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CONTEXT.md",
+      "source_location": "17",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "erp_adapter_module_concept",
+      "label": "ERP Adapter Module — External ERP Integration",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CONTEXT.md",
+      "source_location": "18",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "claude_agents_arch_reviewer_agent",
+      "target": "src_shared_core_architecture_rules_rules",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\agents\\arch-reviewer.md",
+      "source_location": "15",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_arch_reviewer_agent",
+      "target": "either_pattern",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\agents\\arch-reviewer.md",
+      "source_location": "29-34",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_arch_reviewer_agent",
+      "target": "clean_architecture_pattern",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\agents\\arch-reviewer.md",
+      "source_location": "23-28",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_tdd_agent_agent",
+      "target": "src_shared_core_architecture_rules_rules",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\agents\\tdd-agent.md",
+      "source_location": "16",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_tdd_agent_agent",
+      "target": "context_md_domain_glossary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\agents\\tdd-agent.md",
+      "source_location": "16",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_agents_tdd_agent_agent",
+      "target": "tdd_red_green_refactor",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\agents\\tdd-agent.md",
+      "source_location": "19-32",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_domain_modeler_skill",
+      "target": "context_md_domain_glossary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\domain-modeler\\SKILL.md",
+      "source_location": "10",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_improve_codebase_architecture_skill",
+      "target": "context_md_domain_glossary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\improve-codebase-architecture\\SKILL.md",
+      "source_location": "25",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_observability_enforcer_skill",
+      "target": "src_shared_core_architecture_rules_rules",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\src\\shared\\core\\architecture-rules.md",
+      "source_location": "3",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_session_start_skill",
+      "target": "context_md_domain_glossary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md",
+      "source_location": "10",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_session_start_skill",
+      "target": "src_shared_core_architecture_rules_rules",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md",
+      "source_location": "11",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_session_start_skill",
+      "target": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md",
+      "source_location": "12",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_session_start_skill",
+      "target": "claude_agents_tdd_agent_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md",
+      "source_location": "35",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_session_start_skill",
+      "target": "claude_agents_arch_reviewer_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md",
+      "source_location": "36",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_session_start_skill",
+      "target": "claude_skills_domain_modeler_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md",
+      "source_location": "34",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_session_start_skill",
+      "target": "claude_skills_observability_enforcer_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md",
+      "source_location": "37",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_tdd_skill",
+      "target": "context_md_domain_glossary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\tdd\\SKILL.md",
+      "source_location": "27",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_tdd_skill",
+      "target": "tdd_red_green_refactor",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\tdd\\SKILL.md",
+      "source_location": "18-26",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_tdd_skill",
+      "target": "claude_agents_tdd_agent_agent",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\tdd\\SKILL.md",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "src_shared_core_architecture_rules_rules",
+      "target": "either_pattern",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\src\\shared\\core\\architecture-rules.md",
+      "source_location": "15-18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_shared_core_architecture_rules_rules",
+      "target": "clean_architecture_pattern",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\src\\shared\\core\\architecture-rules.md",
+      "source_location": "6-11",
+      "weight": 0.95
+    },
+    {
+      "source": "context_md_domain_glossary",
+      "target": "catalog_module_concept",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CONTEXT.md",
+      "source_location": "16",
+      "weight": 1.0
+    },
+    {
+      "source": "context_md_domain_glossary",
+      "target": "checkout_module_concept",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CONTEXT.md",
+      "source_location": "17",
+      "weight": 1.0
+    },
+    {
+      "source": "context_md_domain_glossary",
+      "target": "erp_adapter_module_concept",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CONTEXT.md",
+      "source_location": "18",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "target": "clean_architecture_pattern",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-19-modular-monolith-clean-architecture-design.md",
+      "source_location": "1-11",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "target": "either_pattern",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-19-modular-monolith-clean-architecture-design.md",
+      "source_location": "87-100",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "target": "catalog_module_concept",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-19-modular-monolith-clean-architecture-design.md",
+      "source_location": "36-38",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "target": "checkout_module_concept",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-19-modular-monolith-clean-architecture-design.md",
+      "source_location": "36-38",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "target": "erp_adapter_module_concept",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-19-modular-monolith-clean-architecture-design.md",
+      "source_location": "36-38",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_erp_sync_design_spec",
+      "target": "transactional_outbox_pattern",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": "26-55",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_erp_sync_design_spec",
+      "target": "bullmq_technology",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": "14-18",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_09_20_erp_sync_design_spec",
+      "target": "cursor_based_polling",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": "26-50",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_19_vitrine_inicial_get_products_plan",
+      "target": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\plans\\2026-09-19-vitrine-inicial-get-products.md",
+      "source_location": "11",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_19_vitrine_inicial_get_products_plan",
+      "target": "claude_agents_tdd_agent_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\plans\\2026-09-19-vitrine-inicial-get-products.md",
+      "source_location": "28",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_erp_sync_plan",
+      "target": "docs_superpowers_specs_2026_09_20_erp_sync_design_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\plans\\2026-09-20-erp-sync.md",
+      "source_location": "11",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_erp_sync_plan",
+      "target": "transactional_outbox_pattern",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\plans\\2026-09-20-erp-sync.md",
+      "source_location": "7",
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_09_20_erp_sync_plan",
+      "target": "bullmq_technology",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\plans\\2026-09-20-erp-sync.md",
+      "source_location": "8-9",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "target": "docs_superpowers_specs_2026_09_19_modular_monolith_clean_architecture_design_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "23",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "target": "claude_agents_arch_reviewer_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "35",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "target": "claude_agents_tdd_agent_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "36",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "target": "claude_skills_session_start_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "39",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "target": "claude_skills_domain_modeler_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "40",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "target": "claude_skills_observability_enforcer_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "41",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "target": "src_shared_core_architecture_rules_rules",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "33",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_00_estrutura_arquitetural_e_fluxo_de_desenvolvimento_prompt",
+      "target": "context_md_domain_glossary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md",
+      "source_location": "32",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_01_vitrine_inicial_prompt",
+      "target": "claude_agents_tdd_agent_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\01-vitrine-inicial.md",
+      "source_location": "13",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_01_vitrine_inicial_prompt",
+      "target": "docs_superpowers_plans_2026_09_19_vitrine_inicial_get_products_plan",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\01-vitrine-inicial.md",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "prompts_02_erp_sync_prompt",
+      "target": "docs_superpowers_specs_2026_09_20_erp_sync_design_spec",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\02-erp-sync.md",
+      "source_location": "42",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_02_erp_sync_prompt",
+      "target": "docs_superpowers_plans_2026_09_20_erp_sync_plan",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\02-erp-sync.md",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "prompts_02_erp_sync_prompt",
+      "target": "transactional_outbox_pattern",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\02-erp-sync.md",
+      "source_location": "26-38",
+      "weight": 1.0
+    },
+    {
+      "source": "prompts_02_erp_sync_prompt",
+      "target": "bullmq_technology",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\prompts\\02-erp-sync.md",
+      "source_location": "17-25",
+      "weight": 1.0
+    },
+    {
+      "source": "docker_compose_test_yml_infra",
+      "target": "docker_compose_yml_infra",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docker-compose.test.yml",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "claude_skills_improve_codebase_architecture_skill",
+      "target": "claude_agents_arch_reviewer_agent",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\improve-codebase-architecture\\SKILL.md",
+      "source_location": null,
+      "weight": 0.7
+    },
+    {
+      "source": "claude_md_project_instructions",
+      "target": "prompts_claude_md_convention",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CLAUDE.md",
+      "source_location": "14",
+      "weight": 1.0
+    },
+    {
+      "source": "transactional_outbox_pattern",
+      "target": "bullmq_technology",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": "26-55",
+      "weight": 0.85
+    },
+    {
+      "source": "transactional_outbox_pattern",
+      "target": "cursor_based_polling",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md",
+      "source_location": "26-55",
+      "weight": 0.85
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "casecellshop_dev_workflow_triad",
+      "label": "CaseCellShop Development Workflow (Session Start + TDD Agent + Arch Reviewer)",
+      "nodes": [
+        "claude_skills_session_start_skill",
+        "claude_agents_tdd_agent_agent",
+        "claude_agents_arch_reviewer_agent"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\.claude\\skills\\session-start\\SKILL.md"
+    },
+    {
+      "id": "erp_sync_reliability_pattern",
+      "label": "ERP Sync Reliability Pattern (Outbox + BullMQ + Cursor Polling)",
+      "nodes": [
+        "transactional_outbox_pattern",
+        "bullmq_technology",
+        "cursor_based_polling"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\docs\\superpowers\\specs\\2026-09-20-erp-sync-design.md"
+    },
+    {
+      "id": "casecellshop_modular_monolith",
+      "label": "CaseCellShop Modular Monolith (Catalog + Checkout + ERP Adapter)",
+      "nodes": [
+        "catalog_module_concept",
+        "checkout_module_concept",
+        "erp_adapter_module_concept"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\rodri\\projects\\totvs\\CONTEXT.md"
+    }
+  ],
+  "input_tokens": 12000,
+  "output_tokens": 3500
+}
