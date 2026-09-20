@@ -28,3 +28,32 @@ model StockFlow {
 
   @@map("stock_flows")
 }
+
+enum OutboxStatus {
+  PENDING
+  ENQUEUED
+  PROCESSED
+  DEAD
+}
+
+model SyncCursor {
+  entity       String   @id
+  lastSyncedAt DateTime @map("last_synced_at")
+
+  @@map("sync_cursors")
+}
+
+model Outbox {
+  id          String       @id @default(uuid())
+  entity      String
+  erpId       String       @map("erp_id")
+  payload     Json
+  status      OutboxStatus @default(PENDING)
+  attempts    Int          @default(0)
+  nextRetryAt DateTime?    @map("next_retry_at")
+  error       String?
+  createdAt   DateTime     @default(now()) @map("created_at")
+
+  @@unique([entity, erpId])
+  @@map("outbox")
+}
