@@ -2,9 +2,10 @@ import { Worker as WorkerThread } from 'node:worker_threads'
 import path from 'node:path'
 import { logger } from '@shared/observability/logger'
 
+const ext = __filename.endsWith('.ts') ? '.worker.ts' : '.worker.js'
 const WORKER_FILES = {
-  product: path.resolve(__dirname, 'erp-poller-product.worker.js'),
-  stock_flow: path.resolve(__dirname, 'erp-poller-stock-flow.worker.js'),
+  product: path.resolve(__dirname, `erp-poller-product${ext}`),
+  stock_flow: path.resolve(__dirname, `erp-poller-stock-flow${ext}`),
 } as const
 
 type WorkerEntity = keyof typeof WORKER_FILES
@@ -28,6 +29,10 @@ export class ErpScheduler {
     setTimeout(() => {
       const worker = new WorkerThread(WORKER_FILES[entity])
       this.workers.set(entity, worker)
+
+      worker.on('error', (err) => {
+        logger.error({ entity, err }, 'erp.scheduler.worker.error')
+      })
 
       worker.on('exit', (code) => {
         if (code !== 0) {
