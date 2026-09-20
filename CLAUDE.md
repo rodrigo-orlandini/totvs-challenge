@@ -12,3 +12,11 @@ output was clearly expected, contradicting its exit code, or garbled.
 # Prompts
 
 Salve todo prompt relevante em `prompts/`. Veja `prompts/CLAUDE.md` para convenção de nomes e estrutura.
+
+# Docker
+
+Engine roda dentro do WSL (Ubuntu), sem Docker Desktop. Se `docker` sozinho
+falhar (ex.: `unknown command: docker compose`, erro de npipe), rode
+prefixando com `wsl`, ex.: `wsl docker compose -f docker-compose.test.yml up -d`.
+Node/npm/vitest continuam rodando no Windows normalmente — portas dos
+containers WSL2 já ficam expostas em localhost do Windows.
