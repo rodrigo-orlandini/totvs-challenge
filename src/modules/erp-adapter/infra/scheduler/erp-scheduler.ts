@@ -12,13 +12,16 @@ type WorkerEntity = keyof typeof WORKER_FILES
 
 export class ErpScheduler {
   private workers: Map<WorkerEntity, WorkerThread> = new Map()
+  private stopping = false
 
   start(): void {
+    this.stopping = false
     this.spawnWorker('product')
     this.spawnWorker('stock_flow')
   }
 
   stop(): void {
+    this.stopping = true
     for (const [, worker] of this.workers) {
       worker.terminate()
     }
@@ -27,6 +30,7 @@ export class ErpScheduler {
 
   private spawnWorker(entity: WorkerEntity, backoffMs = 0): void {
     setTimeout(() => {
+      if (this.stopping) return
       const worker = new WorkerThread(WORKER_FILES[entity])
       this.workers.set(entity, worker)
 
@@ -35,6 +39,7 @@ export class ErpScheduler {
       })
 
       worker.on('exit', (code) => {
+        if (this.stopping) return
         if (code !== 0) {
           const nextBackoff = Math.min(backoffMs === 0 ? 1000 : backoffMs * 2, 30000)
           logger.warn({ entity, exitCode: code, backoffMs: nextBackoff }, 'erp.scheduler.worker.respawn')

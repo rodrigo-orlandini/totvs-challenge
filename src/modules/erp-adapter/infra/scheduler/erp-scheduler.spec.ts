@@ -44,4 +44,17 @@ describe('ErpScheduler', () => {
     scheduler.stop()
     vi.useRealTimers()
   })
+
+  it('does not respawn workers after stop()', () => {
+    vi.useFakeTimers()
+    const scheduler = new ErpScheduler()
+    scheduler.start()
+    vi.runAllTimers()
+    const firstCall = vi.mocked(WorkerThread).mock.results[0].value
+    scheduler.stop()
+    firstCall._emit('exit', 1) // exit fires after terminate()
+    vi.advanceTimersByTime(2000)
+    expect(WorkerThread).toHaveBeenCalledTimes(2) // no new spawns
+    vi.useRealTimers()
+  })
 })
