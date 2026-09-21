@@ -20,6 +20,7 @@ import type { IErpProductRepository } from './repositories/erp-product-repositor
 import type { IErpStockFlowRepository } from './repositories/erp-stock-flow-repository'
 import type { ICatalogProductWriteRepository } from './repositories/catalog-product-write-repository'
 import type { ICatalogStockFlowWriteRepository } from './repositories/catalog-stock-flow-write-repository'
+import type { IProductCacheUpdater } from './repositories/product-cache-updater'
 import type { Redis } from 'ioredis'
 
 export function registerErpAdapterModule(redis: Redis): void {
@@ -62,6 +63,7 @@ export function registerErpAdapterModule(redis: Redis): void {
       container.resolve<ICatalogProductWriteRepository>('ICatalogProductWriteRepository'),
       container.resolve<ICatalogStockFlowWriteRepository>('ICatalogStockFlowWriteRepository'),
       container.resolve<IOutboxRepository>('IOutboxRepository'),
+      container.resolve<IProductCacheUpdater>('IProductCacheUpdater'),
     ),
   })
 
