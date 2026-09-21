@@ -1,6 +1,8 @@
 import * as FastifyModule from 'fastify'
 import type { FastifyInstance } from 'fastify/types/instance'
 import type { FastifyRequest, FastifyReply } from 'fastify'
+import swagger from '@fastify/swagger'
+import swaggerUi from '@fastify/swagger-ui'
 import { randomUUID } from 'node:crypto'
 import { container } from 'tsyringe'
 import { ProductController } from '@modules/catalog/infra/http/product-controller'
@@ -15,6 +17,26 @@ export async function buildApp(redis: Redis): Promise<FastifyInstance> {
     genReqId: () => randomUUID(),
     logger: {
       level: process.env.LOG_LEVEL ?? 'info',
+    },
+  })
+
+  await app.register(swagger, {
+    openapi: {
+      info: {
+        title: 'CaseCellShop API',
+        description: 'API da vitrine de produtos CaseCellShop',
+        version: '1.0.0',
+      },
+      tags: [
+        { name: 'Products', description: 'Vitrine de produtos' },
+      ],
+    },
+  })
+
+  await app.register(swaggerUi, {
+    routePrefix: '/docs',
+    uiConfig: {
+      docExpansion: 'full',
     },
   })
 

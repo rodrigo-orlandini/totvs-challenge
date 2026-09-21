@@ -6,376 +6,376 @@
     "semantic_hash": "090f29e6ccb57c56445b4c7d89c5dcef"
   },
   "package.json": {
-    "mtime": 1789925663.4899766,
-    "seen": 1789927010.0516615,
-    "ast_hash": "d7d27ba050d9aea4f2d2a776dd6c9461",
-    "semantic_hash": "d7d27ba050d9aea4f2d2a776dd6c9461"
+    "mtime": 1789941026.8394003,
+    "seen": 1789943509.0228164,
+    "ast_hash": "425f2b2fb1cc1a0565df3cedc391b4ca",
+    "semantic_hash": ""
   },
   "prisma/seed.mjs": {
-    "mtime": 1789920387.1170893,
-    "seen": 1789927010.0516615,
-    "ast_hash": "b66366a65c210ac5841a414a8ed35d5b",
-    "semantic_hash": "b66366a65c210ac5841a414a8ed35d5b"
+    "mtime": 1789941026.841431,
+    "seen": 1789943509.0228164,
+    "ast_hash": "6f94cee57102d0f8ebc452f97a20ddee",
+    "semantic_hash": ""
   },
   "src/infra/http/fastify-types.d.ts": {
-    "mtime": 1789832555.4426887,
-    "seen": 1789927010.0516615,
-    "ast_hash": "ee26d14b9189b6815bb84c4aef7db958",
-    "semantic_hash": "ee26d14b9189b6815bb84c4aef7db958"
+    "mtime": 1789941026.8450255,
+    "seen": 1789943509.0228164,
+    "ast_hash": "98f1e0c299f9d121fecf913d16af0da3",
+    "semantic_hash": ""
   },
   "src/infra/http/server.ts": {
-    "mtime": 1789924573.5027597,
-    "seen": 1789927010.0516615,
-    "ast_hash": "3d96cbe65dab9f4648eb89fd2068f220",
-    "semantic_hash": "3d96cbe65dab9f4648eb89fd2068f220"
+    "mtime": 1789941026.8461082,
+    "seen": 1789943509.0228164,
+    "ast_hash": "022d11fcc7265409aae19dd79da09f3b",
+    "semantic_hash": ""
   },
   "src/main.ts": {
-    "mtime": 1789926464.0461457,
-    "seen": 1789927010.0516615,
-    "ast_hash": "a75135158a9296d60d56b477a2defa3d",
-    "semantic_hash": "a75135158a9296d60d56b477a2defa3d"
+    "mtime": 1789949451.2932975,
+    "seen": 1789949482.187531,
+    "ast_hash": "a7e60d3649e2469e4026be1ec4e6c6df",
+    "semantic_hash": ""
   },
   "src/modules/catalog/container.ts": {
-    "mtime": 1789926437.2446318,
-    "seen": 1789927010.0516615,
-    "ast_hash": "59618b8b227587525628a372f2ad8244",
-    "semantic_hash": "59618b8b227587525628a372f2ad8244"
+    "mtime": 1789949438.5331466,
+    "seen": 1789949482.187531,
+    "ast_hash": "ace30c2201365513757f3a8f13c936cc",
+    "semantic_hash": ""
   },
   "src/modules/catalog/dtos/list-products-dto.ts": {
-    "mtime": 1789831703.2429485,
-    "seen": 1789927010.0516615,
-    "ast_hash": "352afaf8d14ab60cfe8a4ef65b6c5930",
-    "semantic_hash": "352afaf8d14ab60cfe8a4ef65b6c5930"
+    "mtime": 1789941026.8484318,
+    "seen": 1789943509.0228164,
+    "ast_hash": "265159f2c5ac33a518e326c8be739295",
+    "semantic_hash": ""
   },
   "src/modules/catalog/entities/product.spec.ts": {
-    "mtime": 1789831443.450574,
-    "seen": 1789927010.0516615,
-    "ast_hash": "71f741c547ff704e5804695ed171174b",
-    "semantic_hash": "71f741c547ff704e5804695ed171174b"
+    "mtime": 1789941026.8497992,
+    "seen": 1789943509.0228164,
+    "ast_hash": "f13419f1f4ca83a0433751b636dcc749",
+    "semantic_hash": ""
   },
   "src/modules/catalog/entities/product.ts": {
-    "mtime": 1789831456.8680315,
-    "seen": 1789927010.0516615,
-    "ast_hash": "72535b2c1d018e31a3264ee2367f7f4b",
-    "semantic_hash": "72535b2c1d018e31a3264ee2367f7f4b"
+    "mtime": 1789941026.8507955,
+    "seen": 1789943509.0228164,
+    "ast_hash": "87f7b1e8026f83c39acd395986b16eb1",
+    "semantic_hash": ""
   },
   "src/modules/catalog/entities/value-objects/product-price.spec.ts": {
-    "mtime": 1789831363.4645653,
-    "seen": 1789927010.0516615,
-    "ast_hash": "dacf599649186ce2ea59cce43ed7577d",
-    "semantic_hash": "dacf599649186ce2ea59cce43ed7577d"
+    "mtime": 1789941026.852104,
+    "seen": 1789943509.0228164,
+    "ast_hash": "ec48885e380ad1ce55b92bc3aa9616fe",
+    "semantic_hash": ""
   },
   "src/modules/catalog/entities/value-objects/product-price.ts": {
-    "mtime": 1789831394.6266325,
-    "seen": 1789927010.0516615,
-    "ast_hash": "426030279ff223914a670ad1cdc9e1d2",
-    "semantic_hash": "426030279ff223914a670ad1cdc9e1d2"
+    "mtime": 1789941026.852104,
+    "seen": 1789943509.0228164,
+    "ast_hash": "296ddda31613aa125c59726ae7016fa4",
+    "semantic_hash": ""
   },
   "src/modules/catalog/entities/value-objects/sku.spec.ts": {
-    "mtime": 1789831412.0151649,
-    "seen": 1789927010.0516615,
-    "ast_hash": "76d0edaf16baa1f155191b41f4ac53d3",
-    "semantic_hash": "76d0edaf16baa1f155191b41f4ac53d3"
+    "mtime": 1789941026.8535678,
+    "seen": 1789943509.0228164,
+    "ast_hash": "a10512532e4f45f9df6067477aeb014f",
+    "semantic_hash": ""
   },
   "src/modules/catalog/entities/value-objects/sku.ts": {
-    "mtime": 1789831426.156408,
-    "seen": 1789927010.0516615,
-    "ast_hash": "5f441cddc4bacb57b6ef0c1f6e3faddc",
-    "semantic_hash": "5f441cddc4bacb57b6ef0c1f6e3faddc"
+    "mtime": 1789941026.8545675,
+    "seen": 1789943509.0228164,
+    "ast_hash": "396d87329d90e648739ee2c45410fb6a",
+    "semantic_hash": ""
   },
   "src/modules/catalog/infra/http/product-controller.ts": {
-    "mtime": 1789832516.946742,
-    "seen": 1789927010.0516615,
-    "ast_hash": "780c0ba5ec533b5febfc078f876413c1",
-    "semantic_hash": "780c0ba5ec533b5febfc078f876413c1"
+    "mtime": 1789941026.8555694,
+    "seen": 1789943509.0228164,
+    "ast_hash": "0113e0dec0ed1c7d0c85655b84b4abae",
+    "semantic_hash": ""
   },
   "src/modules/catalog/infra/persistence/prisma-product-repository.integration-spec.ts": {
-    "mtime": 1789832147.0631337,
-    "seen": 1789927010.0516615,
-    "ast_hash": "b4c98b7681a6596a54bec73a719e7d12",
-    "semantic_hash": "b4c98b7681a6596a54bec73a719e7d12"
+    "mtime": 1789941026.856825,
+    "seen": 1789943509.0228164,
+    "ast_hash": "78e2d25be6b1c8fc8dd2431f173c5ffc",
+    "semantic_hash": ""
   },
   "src/modules/catalog/infra/persistence/prisma-product-repository.ts": {
-    "mtime": 1789850001.2932303,
-    "seen": 1789927010.0516615,
-    "ast_hash": "ccc3f83a8513f6acbd3f001f1a05c412",
-    "semantic_hash": "ccc3f83a8513f6acbd3f001f1a05c412"
+    "mtime": 1789943924.130751,
+    "seen": 1789944092.7090287,
+    "ast_hash": "9dbee94efcaa84ec4b8f3ca38e7d9665",
+    "semantic_hash": ""
   },
   "src/modules/catalog/mappers/product-mapper.spec.ts": {
-    "mtime": 1789832646.8129733,
-    "seen": 1789927010.0516615,
-    "ast_hash": "02a59a955b9107b3e375775cac5676f4",
-    "semantic_hash": "02a59a955b9107b3e375775cac5676f4"
+    "mtime": 1789941026.8593817,
+    "seen": 1789943509.0228164,
+    "ast_hash": "7f40de5d6246ecdb3b4b11618e5287e6",
+    "semantic_hash": ""
   },
   "src/modules/catalog/mappers/product-mapper.ts": {
-    "mtime": 1789832362.4250133,
-    "seen": 1789927010.0516615,
-    "ast_hash": "cd2eb792de8332d0989de3024a99a253",
-    "semantic_hash": "cd2eb792de8332d0989de3024a99a253"
+    "mtime": 1789941026.8593817,
+    "seen": 1789943509.0228164,
+    "ast_hash": "082b73bc75414be8527b8642f125d1a2",
+    "semantic_hash": ""
   },
   "src/modules/catalog/presenters/product-presenter.ts": {
-    "mtime": 1789832362.884978,
-    "seen": 1789927010.0516615,
-    "ast_hash": "a97b87de5d6ed95f10577707cf0908cd",
-    "semantic_hash": "a97b87de5d6ed95f10577707cf0908cd"
+    "mtime": 1789941026.8611634,
+    "seen": 1789943509.0228164,
+    "ast_hash": "0b3dd23554bdb4a003343c5808ccbd29",
+    "semantic_hash": ""
   },
   "src/modules/catalog/repositories/product-repository.ts": {
-    "mtime": 1789831704.4851685,
-    "seen": 1789927010.0516615,
-    "ast_hash": "4b5b1d3e40f71b56f148295900a11287",
-    "semantic_hash": "4b5b1d3e40f71b56f148295900a11287"
+    "mtime": 1789941026.8621852,
+    "seen": 1789943509.0228164,
+    "ast_hash": "c0463fe8313b950024c9973538ab5ab7",
+    "semantic_hash": ""
   },
   "src/modules/catalog/use-cases/list-products/in-memory-product-repository.ts": {
-    "mtime": 1789850004.1739762,
-    "seen": 1789927010.0516615,
-    "ast_hash": "e7cc342dff2fb803efb274b02a5b6729",
-    "semantic_hash": "e7cc342dff2fb803efb274b02a5b6729"
+    "mtime": 1789941026.8637078,
+    "seen": 1789943509.0228164,
+    "ast_hash": "2317356ea5240b56914f64e6e47e5c4f",
+    "semantic_hash": ""
   },
   "src/modules/catalog/use-cases/list-products/list-products.spec.ts": {
-    "mtime": 1789831788.4048805,
-    "seen": 1789927010.0516615,
-    "ast_hash": "1e3f3b23ffbfdb0b92791058bea3af1e",
-    "semantic_hash": "1e3f3b23ffbfdb0b92791058bea3af1e"
+    "mtime": 1789941026.864711,
+    "seen": 1789943509.0228164,
+    "ast_hash": "eac91617383bad3b5045b926191a9829",
+    "semantic_hash": ""
   },
   "src/modules/catalog/use-cases/list-products/list-products.ts": {
-    "mtime": 1789850008.7581325,
-    "seen": 1789927010.0516615,
-    "ast_hash": "93c8a071d5545ee80efbe59385df11f7",
-    "semantic_hash": "93c8a071d5545ee80efbe59385df11f7"
+    "mtime": 1789941026.866089,
+    "seen": 1789943509.0228164,
+    "ast_hash": "5b72b8de8d3a9269132153b14a71e700",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/container.ts": {
-    "mtime": 1789926453.7289517,
-    "seen": 1789927010.0516615,
-    "ast_hash": "9a44c82310de3ee0837d8f7256e5bbda",
-    "semantic_hash": "9a44c82310de3ee0837d8f7256e5bbda"
+    "mtime": 1789949444.9512854,
+    "seen": 1789949482.187531,
+    "ast_hash": "30f82c41065af9244aa079edf66ee8ab",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/dtos/erp-product-dto.ts": {
-    "mtime": 1789919233.9936628,
-    "seen": 1789927010.0516615,
-    "ast_hash": "b6e0e9a8e158dde67af44ddea49d91d9",
-    "semantic_hash": "b6e0e9a8e158dde67af44ddea49d91d9"
+    "mtime": 1789941026.8671002,
+    "seen": 1789943509.0228164,
+    "ast_hash": "360130dbce22d7abe7e022b4db2b7060",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/dtos/erp-stock-flow-dto.ts": {
-    "mtime": 1789919235.534099,
-    "seen": 1789927010.0516615,
-    "ast_hash": "77c299f063a7864264a1c397b3b2ed33",
-    "semantic_hash": "77c299f063a7864264a1c397b3b2ed33"
+    "mtime": 1789941026.8685303,
+    "seen": 1789943509.0228164,
+    "ast_hash": "b9e67b095e3c4f1d5ea3d6f7835932e3",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/dtos/sync-job-dto.ts": {
-    "mtime": 1789919237.2597325,
-    "seen": 1789927010.0516615,
-    "ast_hash": "9d2498fb4829101c0ff714926c420dad",
-    "semantic_hash": "9d2498fb4829101c0ff714926c420dad"
+    "mtime": 1789941026.869539,
+    "seen": 1789943509.0228164,
+    "ast_hash": "3e9437b718a816eea7083cc5fda7abcd",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/entities/outbox-entry.ts": {
-    "mtime": 1789919238.9038115,
-    "seen": 1789927010.0516615,
-    "ast_hash": "d4064a6d42174d8c16a7ec5f48d979a8",
-    "semantic_hash": "d4064a6d42174d8c16a7ec5f48d979a8"
+    "mtime": 1789941026.869539,
+    "seen": 1789943509.0228164,
+    "ast_hash": "082df4f328ad53f615e88849360df036",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/errors/sync-processing-error.ts": {
-    "mtime": 1789925612.3056226,
-    "seen": 1789927010.0516615,
-    "ast_hash": "0ae7615a4ac6770f722f05ccd3e30c50",
-    "semantic_hash": "0ae7615a4ac6770f722f05ccd3e30c50"
+    "mtime": 1789941026.87097,
+    "seen": 1789943509.0228164,
+    "ast_hash": "197f67ea0293077a2f92583ba0c15e6a",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/persistence/prisma-catalog-product-write-repository.ts": {
-    "mtime": 1789919783.8689616,
-    "seen": 1789927010.0516615,
-    "ast_hash": "b032d45f4f72b634615e171a7f7c7db2",
-    "semantic_hash": "b032d45f4f72b634615e171a7f7c7db2"
+    "mtime": 1789941026.8722396,
+    "seen": 1789943509.0228164,
+    "ast_hash": "63084e8afbca2827bad3c75c41eb2c0f",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/persistence/prisma-catalog-stock-flow-write-repository.ts": {
-    "mtime": 1789919787.2970858,
-    "seen": 1789927010.0516615,
-    "ast_hash": "1f658e085c3ea7743a2f497d959f7a90",
-    "semantic_hash": "1f658e085c3ea7743a2f497d959f7a90"
+    "mtime": 1789941026.8732426,
+    "seen": 1789943509.0228164,
+    "ast_hash": "3e6e62e06222928210930314a8119927",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/persistence/prisma-erp-product-repository.ts": {
-    "mtime": 1789919776.365381,
-    "seen": 1789927010.0516615,
-    "ast_hash": "02e83d09b2566adfb958958765b696cc",
-    "semantic_hash": "02e83d09b2566adfb958958765b696cc"
+    "mtime": 1789941026.8742435,
+    "seen": 1789943509.0228164,
+    "ast_hash": "90075b63f12a8960b11c49a106ee1aee",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/persistence/prisma-erp-stock-flow-repository.ts": {
-    "mtime": 1789919780.1345172,
-    "seen": 1789927010.0516615,
-    "ast_hash": "343d0686290461ca0d6eb13f0fbbf93a",
-    "semantic_hash": "343d0686290461ca0d6eb13f0fbbf93a"
+    "mtime": 1789941026.8754213,
+    "seen": 1789943509.0228164,
+    "ast_hash": "a9f55ccc74f91437f52b1c94b6463bea",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/persistence/prisma-outbox-repository.integration-spec.ts": {
-    "mtime": 1789919798.3559015,
-    "seen": 1789927010.0516615,
-    "ast_hash": "7204b9dc2abe41e0e6cb077c7440f0f4",
-    "semantic_hash": "7204b9dc2abe41e0e6cb077c7440f0f4"
+    "mtime": 1789941026.8754213,
+    "seen": 1789943509.0228164,
+    "ast_hash": "20c156157446c2b861ef77a20c540d91",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/persistence/prisma-outbox-repository.ts": {
-    "mtime": 1789926298.5886075,
-    "seen": 1789927010.0516615,
-    "ast_hash": "74fce48713f4cb95f506ea3650f9abd0",
-    "semantic_hash": "74fce48713f4cb95f506ea3650f9abd0"
+    "mtime": 1789941026.8768787,
+    "seen": 1789943509.0228164,
+    "ast_hash": "ac77039f89afd076425ecd25f54c742c",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/persistence/prisma-sync-cursor-repository.ts": {
-    "mtime": 1789919772.463351,
-    "seen": 1789927010.0516615,
-    "ast_hash": "d7320231465b9c835ec504fbebdc4ee9",
-    "semantic_hash": "d7320231465b9c835ec504fbebdc4ee9"
+    "mtime": 1789941026.8779602,
+    "seen": 1789943509.0228164,
+    "ast_hash": "c6d7d3cc0c7728168de0423bb4876fad",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/queue/bullmq-relay.integration-spec.ts": {
-    "mtime": 1789924688.0562625,
-    "seen": 1789927010.0516615,
-    "ast_hash": "38124d9d9f88aa57f2f8a5c3611d478f",
-    "semantic_hash": "38124d9d9f88aa57f2f8a5c3611d478f"
+    "mtime": 1789941026.879472,
+    "seen": 1789943509.0228164,
+    "ast_hash": "69d3f5dcef4a4bf16f690d8f3dc78197",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/queue/bullmq-relay.ts": {
-    "mtime": 1789925627.6337712,
-    "seen": 1789927010.0516615,
-    "ast_hash": "1909f3270e847ac78a3deca34a6e024a",
-    "semantic_hash": "1909f3270e847ac78a3deca34a6e024a"
+    "mtime": 1789941026.880486,
+    "seen": 1789943509.0228164,
+    "ast_hash": "9e8911671962c822c6f22dbcd6e76b83",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/queue/bullmq-sync-worker.ts": {
-    "mtime": 1789925642.3609984,
-    "seen": 1789927010.0516615,
-    "ast_hash": "ecc30345772ebf7c0d7c7b33dd533f3e",
-    "semantic_hash": "ecc30345772ebf7c0d7c7b33dd533f3e"
+    "mtime": 1789941026.8815572,
+    "seen": 1789943509.0228164,
+    "ast_hash": "a93ff92ea97301448a5697e7aeab0960",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/scheduler/erp-poller-product.worker.ts": {
-    "mtime": 1789920148.438589,
-    "seen": 1789927010.0516615,
-    "ast_hash": "3c8c468ffcc304456bd466ef07ecbf61",
-    "semantic_hash": "3c8c468ffcc304456bd466ef07ecbf61"
+    "mtime": 1789941026.8836956,
+    "seen": 1789943509.0228164,
+    "ast_hash": "be858369c02e6de7e0f024280ba5da93",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/scheduler/erp-poller-stock-flow.worker.ts": {
-    "mtime": 1789920151.5785139,
-    "seen": 1789927010.0516615,
-    "ast_hash": "88708b516e472839742d0e767284a0ed",
-    "semantic_hash": "88708b516e472839742d0e767284a0ed"
+    "mtime": 1789941026.8851998,
+    "seen": 1789943509.0228164,
+    "ast_hash": "c5f1fbad667ad44150adc7c23fab91d2",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/scheduler/erp-scheduler.spec.ts": {
-    "mtime": 1789923483.426634,
-    "seen": 1789927010.0516615,
-    "ast_hash": "8258cac2a1158ca44862a342bdcb0faf",
-    "semantic_hash": "8258cac2a1158ca44862a342bdcb0faf"
+    "mtime": 1789944031.036476,
+    "seen": 1789944092.7090287,
+    "ast_hash": "359f262bd7c6e51d82ad0ceda482dc3d",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/scheduler/erp-scheduler.ts": {
-    "mtime": 1789923474.5236518,
-    "seen": 1789927010.0516615,
-    "ast_hash": "15d8bd7bbb6e39c5ed6f1c11a6ff3a2a",
-    "semantic_hash": "15d8bd7bbb6e39c5ed6f1c11a6ff3a2a"
+    "mtime": 1789941026.8871965,
+    "seen": 1789943509.0228164,
+    "ast_hash": "6bad50cec572e2926eea28454d5ccaf2",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/repositories/catalog-product-write-repository.ts": {
-    "mtime": 1789919247.4666648,
-    "seen": 1789927010.0516615,
-    "ast_hash": "6f262ae36c033583c5e0a14331ca2274",
-    "semantic_hash": "6f262ae36c033583c5e0a14331ca2274"
+    "mtime": 1789941026.888195,
+    "seen": 1789943509.0228164,
+    "ast_hash": "ea21e3255ad5159baf2c0230155ca1e1",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/repositories/catalog-stock-flow-write-repository.ts": {
-    "mtime": 1789919249.035421,
-    "seen": 1789927010.0516615,
-    "ast_hash": "f408b65d573f67dfc0c652b486624926",
-    "semantic_hash": "f408b65d573f67dfc0c652b486624926"
+    "mtime": 1789941026.8892043,
+    "seen": 1789943509.0228164,
+    "ast_hash": "c0360be47503367739ac9c0c60fff4c9",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/repositories/erp-product-repository.ts": {
-    "mtime": 1789919244.4249568,
-    "seen": 1789927010.0516615,
-    "ast_hash": "0b0b808f4fe9071f65bd7cfa5d197771",
-    "semantic_hash": "0b0b808f4fe9071f65bd7cfa5d197771"
+    "mtime": 1789941026.8904333,
+    "seen": 1789943509.0228164,
+    "ast_hash": "02fb2ccb0cd76610fbc9e212113e6a74",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/repositories/erp-stock-flow-repository.ts": {
-    "mtime": 1789919245.8393633,
-    "seen": 1789927010.0516615,
-    "ast_hash": "0a95ab8eade1ef0004f2a09973e0cbe8",
-    "semantic_hash": "0a95ab8eade1ef0004f2a09973e0cbe8"
+    "mtime": 1789941026.8904333,
+    "seen": 1789943509.0228164,
+    "ast_hash": "9d2e7fc123f4274ed4a694103503d9bb",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/repositories/outbox-repository.ts": {
-    "mtime": 1789919241.4789755,
-    "seen": 1789927010.0516615,
-    "ast_hash": "c5e622ac0016b5ba774c2bdbe1697559",
-    "semantic_hash": "c5e622ac0016b5ba774c2bdbe1697559"
+    "mtime": 1789941026.8918984,
+    "seen": 1789943509.0228164,
+    "ast_hash": "1b231fd31151d87f6152549955c7b4ff",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/repositories/sync-cursor-repository.ts": {
-    "mtime": 1789919243.0023217,
-    "seen": 1789927010.0516615,
-    "ast_hash": "3b16e5e8862925cb6ad005f031f5d480",
-    "semantic_hash": "3b16e5e8862925cb6ad005f031f5d480"
+    "mtime": 1789941026.8931777,
+    "seen": 1789943509.0228164,
+    "ast_hash": "08c333a130efcc5955248e8877118c82",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/in-memory-outbox-repository.ts": {
-    "mtime": 1789926304.9693031,
-    "seen": 1789927010.0516615,
-    "ast_hash": "0a3844f526b5d6ce6da5769a5dd94682",
-    "semantic_hash": "0a3844f526b5d6ce6da5769a5dd94682"
+    "mtime": 1789941026.8941774,
+    "seen": 1789943509.0228164,
+    "ast_hash": "238512cb3dd7ef078ea928540aded9b1",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/in-memory-sync-cursor-repository.ts": {
-    "mtime": 1789919256.011117,
-    "seen": 1789927010.0516615,
-    "ast_hash": "63bfc453df0a9249770aa7e032bc5ebf",
-    "semantic_hash": "63bfc453df0a9249770aa7e032bc5ebf"
+    "mtime": 1789941026.8957486,
+    "seen": 1789943509.0228164,
+    "ast_hash": "c078adef1ffcbb990fcade8f129d6a05",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/poll-erp-products/in-memory-erp-product-repository.ts": {
-    "mtime": 1789919393.830238,
-    "seen": 1789927010.0516615,
-    "ast_hash": "c598fe81a8ef9fb39b7d46283bf63292",
-    "semantic_hash": "c598fe81a8ef9fb39b7d46283bf63292"
+    "mtime": 1789941026.897002,
+    "seen": 1789943509.0228164,
+    "ast_hash": "5a07aea57fe36d0246582c44aa19e2e6",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/poll-erp-products/poll-erp-products.spec.ts": {
-    "mtime": 1789919401.5243478,
-    "seen": 1789927010.0516615,
-    "ast_hash": "1c7be56f86d7f6002baecec3cbb965b4",
-    "semantic_hash": "1c7be56f86d7f6002baecec3cbb965b4"
+    "mtime": 1789943945.1942377,
+    "seen": 1789944092.7090287,
+    "ast_hash": "58219c59befe2447eac51a5438753d7c",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/poll-erp-products/poll-erp-products.ts": {
-    "mtime": 1789919414.311401,
-    "seen": 1789927010.0516615,
-    "ast_hash": "254e2e11603b2b67ad7614ab7254f618",
-    "semantic_hash": "254e2e11603b2b67ad7614ab7254f618"
+    "mtime": 1789941026.9000027,
+    "seen": 1789943509.0228164,
+    "ast_hash": "6a29eef7a3b9f4dd2afa5e7164104954",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/poll-erp-stock-flows/in-memory-erp-stock-flow-repository.ts": {
-    "mtime": 1789919497.9819956,
-    "seen": 1789927010.0516615,
-    "ast_hash": "2c48255c66958fe97856d7e0f83b6474",
-    "semantic_hash": "2c48255c66958fe97856d7e0f83b6474"
+    "mtime": 1789941026.9013174,
+    "seen": 1789943509.0228164,
+    "ast_hash": "c33521a999ac633dcb9e35a7ba6999bb",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/poll-erp-stock-flows/poll-erp-stock-flows.spec.ts": {
-    "mtime": 1789919504.808529,
-    "seen": 1789927010.0516615,
-    "ast_hash": "3c262e7d4c320fe251eca2935c01e9dd",
-    "semantic_hash": "3c262e7d4c320fe251eca2935c01e9dd"
+    "mtime": 1789941026.9023192,
+    "seen": 1789943509.0228164,
+    "ast_hash": "2813081e6769719c87f953fb9274c4cc",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/poll-erp-stock-flows/poll-erp-stock-flows.ts": {
-    "mtime": 1789919525.8964818,
-    "seen": 1789927010.0516615,
-    "ast_hash": "f52fa2cdc53ebb016fc3bb7cfc497b97",
-    "semantic_hash": "f52fa2cdc53ebb016fc3bb7cfc497b97"
+    "mtime": 1789941026.9043243,
+    "seen": 1789943509.0228164,
+    "ast_hash": "00c302725088d35b857a8ab2dd6bdb68",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/process-sync-job/in-memory-catalog-product-write-repository.ts": {
-    "mtime": 1789919608.1076372,
-    "seen": 1789927010.0516615,
-    "ast_hash": "3606eb7e6d9183e9e11108614dca2f31",
-    "semantic_hash": "3606eb7e6d9183e9e11108614dca2f31"
+    "mtime": 1789941026.905664,
+    "seen": 1789943509.0228164,
+    "ast_hash": "3ef7bc6ca96ef0ef259ea5b7e590240a",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/process-sync-job/in-memory-catalog-stock-flow-write-repository.ts": {
-    "mtime": 1789919610.2991967,
-    "seen": 1789927010.0516615,
-    "ast_hash": "acf0747048f107238fecdbe54537a7bd",
-    "semantic_hash": "acf0747048f107238fecdbe54537a7bd"
+    "mtime": 1789941026.9071047,
+    "seen": 1789943509.0228164,
+    "ast_hash": "fd49b5f30ca12e1a2a72960246187984",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/process-sync-job/process-sync-job.spec.ts": {
-    "mtime": 1789925653.7867742,
-    "seen": 1789927010.0516615,
-    "ast_hash": "4ecdb29e42b34dad0bdb655316877f21",
-    "semantic_hash": "4ecdb29e42b34dad0bdb655316877f21"
+    "mtime": 1789950128.2057116,
+    "seen": 1789950201.3479161,
+    "ast_hash": "c601dd8778071694eab280a63e1fe637",
+    "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/process-sync-job/process-sync-job.ts": {
-    "mtime": 1789925623.420137,
-    "seen": 1789927010.0516615,
-    "ast_hash": "532daa010a8aa7161b9e36ad6847dd98",
-    "semantic_hash": "532daa010a8aa7161b9e36ad6847dd98"
+    "mtime": 1789950082.4310431,
+    "seen": 1789950201.3479161,
+    "ast_hash": "a4e332855bc2241d61df64baad6dcb6a",
+    "semantic_hash": ""
   },
   "src/shared/container.ts": {
-    "mtime": 1789926424.5007472,
-    "seen": 1789927010.0516615,
-    "ast_hash": "b56e5aafad46875a3720048d5c022f0e",
-    "semantic_hash": "b56e5aafad46875a3720048d5c022f0e"
+    "mtime": 1789941026.9111931,
+    "seen": 1789943509.0228164,
+    "ast_hash": "6a6a4a8e81e9ae325c44b0b34f6a19d9",
+    "semantic_hash": ""
   },
   "src/shared/core/either.ts": {
     "mtime": 1789827309.7954795,
@@ -390,16 +390,16 @@
     "semantic_hash": "f78cc9ee4155ac73c75d652a33b06c05"
   },
   "src/shared/database/erp-prisma-client.ts": {
-    "mtime": 1789919760.4052052,
-    "seen": 1789927010.0516615,
-    "ast_hash": "d1b0c9841266e18261e7ceb480f5c103",
-    "semantic_hash": "d1b0c9841266e18261e7ceb480f5c103"
+    "mtime": 1789941026.9122524,
+    "seen": 1789943509.0228164,
+    "ast_hash": "5c3d0f109fd31e80738002ed70b520e1",
+    "semantic_hash": ""
   },
   "src/shared/database/prisma-client.ts": {
-    "mtime": 1789831035.268147,
-    "seen": 1789927010.0516615,
-    "ast_hash": "a195dc9850f2efb634aa7d7f8ac6cd6d",
-    "semantic_hash": "a195dc9850f2efb634aa7d7f8ac6cd6d"
+    "mtime": 1789941026.9132702,
+    "seen": 1789943509.0228164,
+    "ast_hash": "f8d0a1282ebdd21dd9e1aed5b724b51d",
+    "semantic_hash": ""
   },
   "src/shared/errors/domain-error.ts": {
     "mtime": 1789827311.9574983,
@@ -414,22 +414,22 @@
     "semantic_hash": "0f7c419731b908b758f6b8d543ea33c3"
   },
   "src/shared/observability/logger.ts": {
-    "mtime": 1789830932.420777,
-    "seen": 1789927010.0516615,
-    "ast_hash": "d1ea94f46466a95587481821a18c4c2b",
-    "semantic_hash": "d1ea94f46466a95587481821a18c4c2b"
+    "mtime": 1789941026.9146535,
+    "seen": 1789943509.0228164,
+    "ast_hash": "4f0d0e401f5084cc37bb27c08fb73cb1",
+    "semantic_hash": ""
   },
   "src/shared/observability/tracer.ts": {
-    "mtime": 1789830935.3539453,
-    "seen": 1789927010.0516615,
-    "ast_hash": "af80c3ce339151ff1ff7cd8179542507",
-    "semantic_hash": "af80c3ce339151ff1ff7cd8179542507"
+    "mtime": 1789941026.9161339,
+    "seen": 1789943509.0228164,
+    "ast_hash": "ed3e258e42bfeb4073ff9317e2cfd22f",
+    "semantic_hash": ""
   },
   "src/shared/types/pagination.ts": {
-    "mtime": 1789830930.100921,
-    "seen": 1789927010.0516615,
-    "ast_hash": "50b42104dc6efdcb87b488a406223219",
-    "semantic_hash": "50b42104dc6efdcb87b488a406223219"
+    "mtime": 1789941026.9161339,
+    "seen": 1789943509.0228164,
+    "ast_hash": "baea45955c7fec3a759b7601a0bcd1d8",
+    "semantic_hash": ""
   },
   "tsconfig.build.json": {
     "mtime": 1789827285.8079102,
@@ -444,16 +444,16 @@
     "semantic_hash": "f44761d7c2b50cf71754aecbcd0be293"
   },
   "vitest.config.ts": {
-    "mtime": 1789925660.5511,
-    "seen": 1789927010.0516615,
-    "ast_hash": "7b9ac3e087f78d639a676fc336c01f3b",
-    "semantic_hash": "7b9ac3e087f78d639a676fc336c01f3b"
+    "mtime": 1789941026.9185567,
+    "seen": 1789943509.0228164,
+    "ast_hash": "2c47c4bd113e57b24a9abb4fc9679b3d",
+    "semantic_hash": ""
   },
   "vitest.integration.ts": {
-    "mtime": 1789924672.4638088,
-    "seen": 1789927010.0516615,
-    "ast_hash": "f0593374d3d903f9a2fb41e5ab77226d",
-    "semantic_hash": "f0593374d3d903f9a2fb41e5ab77226d"
+    "mtime": 1789943406.4172947,
+    "seen": 1789943509.0228164,
+    "ast_hash": "deb40b1d6bdfe6decc7e8bf0ae47a766",
+    "semantic_hash": ""
   },
   ".claude/agents/arch-reviewer.md": {
     "mtime": 1789827357.969565,
@@ -474,28 +474,28 @@
     "semantic_hash": "88160291054b3027cc1aedc386d350dc"
   },
   "docker-compose.test.yml": {
-    "mtime": 1789918957.600141,
-    "seen": 1789927010.0516615,
-    "ast_hash": "45ee0df5803be1f599abcbe53f07bf3b",
-    "semantic_hash": "45ee0df5803be1f599abcbe53f07bf3b"
+    "mtime": 1789941026.8001251,
+    "seen": 1789943509.0228164,
+    "ast_hash": "be0b8356fbcfeb16531bcd35611a0ab8",
+    "semantic_hash": ""
   },
   "docker-compose.yml": {
-    "mtime": 1789918955.1655035,
-    "seen": 1789927010.0516615,
-    "ast_hash": "36ce3a889c757a09b5d3941fb934e1b6",
-    "semantic_hash": "36ce3a889c757a09b5d3941fb934e1b6"
+    "mtime": 1789941026.8011222,
+    "seen": 1789943509.0228164,
+    "ast_hash": "8ba1c65d90d76d0022ac0500002af302",
+    "semantic_hash": ""
   },
   "docs/superpowers/plans/2026-09-19-vitrine-inicial-get-products.md": {
-    "mtime": 1789830719.1486323,
-    "seen": 1789927010.0516615,
-    "ast_hash": "9f7355da215ecf62d5aa7e48dcfba30d",
-    "semantic_hash": "9f7355da215ecf62d5aa7e48dcfba30d"
+    "mtime": 1789941026.803475,
+    "seen": 1789943509.0228164,
+    "ast_hash": "5588736d53f4dedc9744f14ce61d1870",
+    "semantic_hash": ""
   },
   "docs/superpowers/plans/2026-09-20-erp-sync.md": {
-    "mtime": 1789918812.4691777,
-    "seen": 1789927010.0516615,
-    "ast_hash": "0b35cf077c129e8c7e95e865ccc618fc",
-    "semantic_hash": "0b35cf077c129e8c7e95e865ccc618fc"
+    "mtime": 1789941026.8054783,
+    "seen": 1789943509.0228164,
+    "ast_hash": "54382ae559708cb00bdd6b6b9be46428",
+    "semantic_hash": ""
   },
   "docs/superpowers/specs/2026-09-19-modular-monolith-clean-architecture-design.md": {
     "mtime": 1789828829.3276005,
@@ -504,10 +504,10 @@
     "semantic_hash": "be37e9735cc70b6c14f3cf785aaef818"
   },
   "docs/superpowers/specs/2026-09-20-erp-sync-design.md": {
-    "mtime": 1789918146.1630025,
-    "seen": 1789927010.0516615,
-    "ast_hash": "d0aac536b1f2a000ffc04aabefecf972",
-    "semantic_hash": "d0aac536b1f2a000ffc04aabefecf972"
+    "mtime": 1789941026.8065445,
+    "seen": 1789943509.0228164,
+    "ast_hash": "5ec8541a8d0a60e76987a0c25a26396d",
+    "semantic_hash": ""
   },
   "prompts/00-estrutura-arquitetural-e-fluxo-de-desenvolvimento.md": {
     "mtime": 1789827417.5837357,
@@ -516,21 +516,147 @@
     "semantic_hash": "200c86b40888b4347895491fd3bfcc79"
   },
   "prompts/01-vitrine-inicial.md": {
-    "mtime": 1789830270.8203928,
-    "seen": 1789927010.0516615,
-    "ast_hash": "7f8f17d1ddea72c134a9cfc5343a8539",
-    "semantic_hash": "7f8f17d1ddea72c134a9cfc5343a8539"
+    "mtime": 1789941026.84243,
+    "seen": 1789943509.0228164,
+    "ast_hash": "82ddc509e49e93c5528bf7862333422c",
+    "semantic_hash": ""
   },
   "prompts/02-erp-sync.md": {
-    "mtime": 1789926571.9206324,
-    "seen": 1789927010.0516615,
-    "ast_hash": "fc8a464c33e681a9a8fe85016fb1e0a1",
-    "semantic_hash": "fc8a464c33e681a9a8fe85016fb1e0a1"
+    "mtime": 1789941150.744881,
+    "seen": 1789943509.0228164,
+    "ast_hash": "372820ad172f809a21fbae0bd489cd4f",
+    "semantic_hash": ""
   },
   "src/shared/core/architecture-rules.md": {
     "mtime": 1789827330.2151272,
     "seen": 1789927010.0516615,
     "ast_hash": "c302a26b36894577780a16f399f02ddd",
     "semantic_hash": "c302a26b36894577780a16f399f02ddd"
+  },
+  ".claude/skills/domain-modeler/SKILL.md": {
+    "mtime": 1789827395.5813742,
+    "seen": 1789943509.0228164,
+    "ast_hash": "213614d1d14504533820cd98491e2f2d",
+    "semantic_hash": ""
+  },
+  ".claude/skills/improve-codebase-architecture/SKILL.md": {
+    "mtime": 1789823792.4562936,
+    "seen": 1789943509.0228164,
+    "ast_hash": "017ea2a8cf870999fb4a46cfe632a625",
+    "semantic_hash": ""
+  },
+  ".claude/skills/observability-enforcer/SKILL.md": {
+    "mtime": 1789827406.0151,
+    "seen": 1789943509.0228164,
+    "ast_hash": "f254761b1e8bb741cbded4206432a555",
+    "semantic_hash": ""
+  },
+  ".claude/skills/session-start/SKILL.md": {
+    "mtime": 1789827382.6297603,
+    "seen": 1789943509.0228164,
+    "ast_hash": "ae3f437471604b0e5602f00836eaacd9",
+    "semantic_hash": ""
+  },
+  ".claude/skills/tdd/SKILL.md": {
+    "mtime": 1789823779.6391032,
+    "seen": 1789943509.0228164,
+    "ast_hash": "757b68e31e4e5a5c2d33e61927dc0e03",
+    "semantic_hash": ""
+  },
+  ".github/workflows/ci.yml": {
+    "mtime": 1789944347.3519018,
+    "seen": 1789944401.9407969,
+    "ast_hash": "eb538dc309ac109131007313641b7809",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1789943303.6421578,
+    "seen": 1789943509.0228164,
+    "ast_hash": "823eb05e639301bc3c36a76e9b723287",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1789819905.9661496,
+    "seen": 1789943509.0228164,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "prompts/03-git-workflow-e-ci.md": {
+    "mtime": 1789943487.16998,
+    "seen": 1789943509.0228164,
+    "ast_hash": "d6695eaf91965e9507125cecebcb0b7b",
+    "semantic_hash": ""
+  },
+  "prompts/CLAUDE.md": {
+    "mtime": 1789822421.4509788,
+    "seen": 1789943509.0228164,
+    "ast_hash": "e7141751091b69b47f241195293a4763",
+    "semantic_hash": ""
+  },
+  "vitest.coverage.ts": {
+    "mtime": 1789949453.9801424,
+    "seen": 1789949482.187531,
+    "ast_hash": "c8956db6eb4847a9b8cb3e976a4b5335",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-09-20-cache-vitrine-design.md": {
+    "mtime": 1789947359.5658782,
+    "seen": 1789947366.7568738,
+    "ast_hash": "3f171b3049a718f76eb778ab2e8d3d14",
+    "semantic_hash": ""
+  },
+  "prompts/04-cache-vitrine.md": {
+    "mtime": 1789945447.0770886,
+    "seen": 1789947366.7568738,
+    "ast_hash": "3a97144c0489db34dee19c5db8c1acff",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/cache/product-cache-service.spec.ts": {
+    "mtime": 1789950142.9120004,
+    "seen": 1789950201.3479161,
+    "ast_hash": "996ecb2a202379d312b003bea7a0a902",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/cache/product-cache-service.ts": {
+    "mtime": 1789950111.9859471,
+    "seen": 1789950201.3479161,
+    "ast_hash": "3e3f1c09b10c13beae1c25b98c4b6313",
+    "semantic_hash": ""
+  },
+  "src/modules/erp-adapter/repositories/product-cache-updater.ts": {
+    "mtime": 1789950079.0094914,
+    "seen": 1789950201.3479161,
+    "ast_hash": "d6daae163859d8d473c2b084fd77753a",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-09-20-cache-vitrine.md": {
+    "mtime": 1789947937.1913395,
+    "seen": 1789948204.5964224,
+    "ast_hash": "9ec4549487e5590153e39c9537214739",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/infra/persistence/cached-product-repository.spec.ts": {
+    "mtime": 1789950229.8985586,
+    "seen": 1789950243.7818463,
+    "ast_hash": "e352271d83aa0252fac60f5f1daa37e7",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/infra/persistence/cached-product-repository.ts": {
+    "mtime": 1789948632.8563519,
+    "seen": 1789948697.0310426,
+    "ast_hash": "3297cdcb70517e864c4319b1a2b67c0d",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/cache/cache-refresh-scheduler.spec.ts": {
+    "mtime": 1789950155.8429675,
+    "seen": 1789950201.3479161,
+    "ast_hash": "c921e081a1d2cde50d63aa347adca50a",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/cache/cache-refresh-scheduler.ts": {
+    "mtime": 1789950120.6941085,
+    "seen": 1789950201.3479161,
+    "ast_hash": "8cfd321954378764569174d319e8c9af",
+    "semantic_hash": ""
   }
 }

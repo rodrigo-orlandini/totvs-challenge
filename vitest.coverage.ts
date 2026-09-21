@@ -42,6 +42,7 @@ export default defineConfig({
         'src/modules/erp-adapter/infra/scheduler/erp-poller-product.worker.ts',
         'src/modules/erp-adapter/infra/scheduler/erp-poller-stock-flow.worker.ts',
         'src/modules/erp-adapter/container.ts',
+        'src/modules/catalog/cache/cache-refresh-scheduler.ts',
         'src/shared/database/erp-prisma-client.ts',
       ],
       thresholds: {

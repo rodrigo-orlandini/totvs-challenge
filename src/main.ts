@@ -6,6 +6,7 @@ import { buildApp } from '@infra/http/server'
 import { BullMQRelay } from '@modules/erp-adapter/infra/queue/bullmq-relay'
 import { BullMQSyncWorker } from '@modules/erp-adapter/infra/queue/bullmq-sync-worker'
 import { ErpScheduler } from '@modules/erp-adapter/infra/scheduler/erp-scheduler'
+import { CacheRefreshScheduler } from '@modules/catalog/cache/cache-refresh-scheduler'
 import { container } from 'tsyringe'
 import Redis from 'ioredis'
 
@@ -14,7 +15,7 @@ async function bootstrap(): Promise<void> {
   const redis = new Redis({ host: redisUrl.hostname, port: Number(redisUrl.port) || 6379, maxRetriesPerRequest: null })
 
   registerSharedInfra()
-  registerCatalogModule()
+  registerCatalogModule(redis)
   registerErpAdapterModule(redis)
 
   const app = await buildApp(redis)
@@ -23,11 +24,13 @@ async function bootstrap(): Promise<void> {
 
   const relay = container.resolve(BullMQRelay)
   const worker = container.resolve(BullMQSyncWorker)
-  const scheduler = container.resolve(ErpScheduler)
+  const erpScheduler = container.resolve(ErpScheduler)
+  const cacheScheduler = container.resolve(CacheRefreshScheduler)
 
   relay.start()
   worker.start()
-  scheduler.start()
+  erpScheduler.start()
+  cacheScheduler.start()
 }
 
 bootstrap().catch((err) => {
