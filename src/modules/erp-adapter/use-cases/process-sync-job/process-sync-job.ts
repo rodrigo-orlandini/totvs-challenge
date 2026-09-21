@@ -78,6 +78,7 @@ export class ProcessSyncJobUseCase
             sku: payload.sku as string,
             name: payload.name as string,
             price: payload.price as number,
+            createdAt: new Date((payload.created_at ?? payload.updated_at) as string),
             updatedAt: new Date(payload.updated_at as string),
           })
         } catch (cacheErr) {

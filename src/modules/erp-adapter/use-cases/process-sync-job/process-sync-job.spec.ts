@@ -94,6 +94,7 @@ describe('ProcessSyncJobUseCase', () => {
       sku: 'SKU-001',
       name: 'Capa',
       price: 49.9,
+      createdAt: new Date('2026-01-01T00:00:00Z'),
       updatedAt: new Date('2026-01-01T00:00:00Z'),
     })
   })

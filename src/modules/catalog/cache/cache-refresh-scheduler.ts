@@ -1,5 +1,6 @@
 import type { PrismaClient } from '@prisma/client'
 import type { ProductCacheService } from './product-cache-service'
+import { jitteredTtlMs } from './product-cache-service'
 import type { ProductResponseItem } from '../dtos/list-products-dto'
 import { logger } from '@shared/observability/logger'
 
@@ -40,7 +41,7 @@ export class CacheRefreshScheduler {
     await this.loadAllFromDb()
   }
 
-  private async tick(): Promise<void> {
+  async tick(): Promise<void> {
     const now = Date.now()
     const entries = [...this.cache.l1]
     for (const [id, entry] of entries) {
@@ -49,6 +50,15 @@ export class CacheRefreshScheduler {
           logger.warn({ id, err }, 'cache.scheduler.refresh.error'),
         )
       }
+    }
+    // Renew sorted set TTL if near expiry or missing
+    try {
+      const pttl = await this.cache.redis.pttl('products:sorted')
+      if (pttl < REFRESH_AHEAD_MS) {
+        await this.cache.redis.pexpire('products:sorted', jitteredTtlMs())
+      }
+    } catch (err) {
+      logger.warn({ err }, 'cache.scheduler.sorted.ttl.warn')
     }
   }
 

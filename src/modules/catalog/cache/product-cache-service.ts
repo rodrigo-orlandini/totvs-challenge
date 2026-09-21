@@ -3,7 +3,7 @@ import type { ProductResponseItem } from '../dtos/list-products-dto'
 import type { IProductCacheUpdater } from '@modules/erp-adapter/repositories/product-cache-updater'
 import { logger } from '@shared/observability/logger'
 
-interface L1Entry {
+interface IL1Entry {
   data: ProductResponseItem
   expiresAt: number
   frequency: number
@@ -11,7 +11,7 @@ interface L1Entry {
 
 const L1_MAX = 1000
 
-function jitteredTtlMs(): number {
+export function jitteredTtlMs(): number {
   return (600 + Math.floor(Math.random() * 20) - 10) * 1000
 }
 
@@ -20,7 +20,7 @@ function jitteredTtlSec(): number {
 }
 
 export class ProductCacheService implements IProductCacheUpdater {
-  readonly l1 = new Map<string, L1Entry>()
+  readonly l1 = new Map<string, IL1Entry>()
   private l1IdsEntry: { ids: string[]; expiresAt: number } | null = null
 
   constructor(readonly redis: Redis) {}
@@ -39,7 +39,8 @@ export class ProductCacheService implements IProductCacheUpdater {
 
   private writeL1(id: string, data: ProductResponseItem): void {
     if (this.l1.size >= L1_MAX && !this.l1.has(id)) this.evictLFU()
-    this.l1.set(id, { data, expiresAt: Date.now() + jitteredTtlMs(), frequency: 1 })
+    const entry: IL1Entry = { data, expiresAt: Date.now() + jitteredTtlMs(), frequency: 1 }
+    this.l1.set(id, entry)
   }
 
   async getProduct(id: string): Promise<ProductResponseItem | null> {
@@ -47,13 +48,17 @@ export class ProductCacheService implements IProductCacheUpdater {
     if (entry) {
       if (entry.expiresAt > Date.now()) {
         entry.frequency++
+        logger.debug({ id }, 'cache.l1.hit')
         return entry.data
       }
       this.l1.delete(id)
     }
     try {
       const raw = await this.redis.get(`product:${id}`)
-      if (!raw) return null
+      if (!raw) {
+        logger.debug({ id }, 'cache.miss')
+        return null
+      }
       let data: ProductResponseItem
       try {
         data = JSON.parse(raw) as ProductResponseItem
@@ -61,6 +66,7 @@ export class ProductCacheService implements IProductCacheUpdater {
         logger.warn({ id }, 'cache.l2.parse.error')
         return null
       }
+      logger.debug({ id }, 'cache.l2.hit')
       this.writeL1(id, data)
       return data
     } catch (err) {
@@ -107,6 +113,7 @@ export class ProductCacheService implements IProductCacheUpdater {
       for (const p of products) {
         pipeline.zadd('products:sorted', p.score, p.id)
       }
+      pipeline.pexpire('products:sorted', jitteredTtlMs())
       await pipeline.exec()
     } catch (err) {
       logger.warn({ err }, 'cache.l2.setids.error')
@@ -131,10 +138,10 @@ export class ProductCacheService implements IProductCacheUpdater {
     }
   }
 
-  async updateProduct(id: string, data: { sku: string; name: string; price: number; updatedAt: Date }): Promise<void> {
+  async updateProduct(id: string, data: { sku: string; name: string; price: number; createdAt: Date; updatedAt: Date }): Promise<void> {
     const existing = await this.getProduct(id)
     if (!existing) {
-      await this.addToSortedSet(id, data.updatedAt.getTime())
+      await this.addToSortedSet(id, data.createdAt.getTime())
       return
     }
     await this.setProduct(id, { ...existing, sku: data.sku, name: data.name, price: data.price })

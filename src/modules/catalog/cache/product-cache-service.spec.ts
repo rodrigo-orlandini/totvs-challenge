@@ -11,6 +11,7 @@ function item(overrides: Partial<ProductResponseItem> = {}): ProductResponseItem
 function makeRedis() {
   const mockPipeline = {
     zadd: vi.fn().mockReturnThis(),
+    pexpire: vi.fn().mockReturnThis(),
     exec: vi.fn().mockResolvedValue([]),
   }
   return {
@@ -258,7 +259,7 @@ describe('ProductCacheService', () => {
     it('updates sku/name/price and preserves availableQuantity on cache hit', async () => {
       const original = item({ availableQuantity: 50 })
       cache.l1.set('p1', { data: original, expiresAt: Date.now() + 999999, frequency: 1 })
-      await cache.updateProduct('p1', { sku: 'NEW', name: 'New Name', price: 99.9, updatedAt: new Date() })
+      await cache.updateProduct('p1', { sku: 'NEW', name: 'New Name', price: 99.9, createdAt: new Date(), updatedAt: new Date() })
       const updated = cache.l1.get('p1')!.data
       expect(updated.sku).toBe('NEW')
       expect(updated.name).toBe('New Name')
@@ -266,10 +267,11 @@ describe('ProductCacheService', () => {
       expect(updated.availableQuantity).toBe(50)
     })
 
-    it('calls addToSortedSet and does not set product key on cache miss', async () => {
-      const updatedAt = new Date(1_700_000_000_000)
-      await cache.updateProduct('p1', { sku: 'SKU', name: 'N', price: 1, updatedAt })
-      expect(redis.zadd).toHaveBeenCalledWith('products:sorted', updatedAt.getTime(), 'p1')
+    it('calls addToSortedSet with createdAt score and does not set product key on cache miss', async () => {
+      const createdAt = new Date(1_700_000_000_000)
+      const updatedAt = new Date(1_700_000_001_000)
+      await cache.updateProduct('p1', { sku: 'SKU', name: 'N', price: 1, createdAt, updatedAt })
+      expect(redis.zadd).toHaveBeenCalledWith('products:sorted', createdAt.getTime(), 'p1')
       expect(redis.set).not.toHaveBeenCalled()
     })
 
@@ -277,7 +279,7 @@ describe('ProductCacheService', () => {
     it('updates product when found only in L2 (not L1)', async () => {
       const original = item({ availableQuantity: 20 })
       redis.get.mockResolvedValue(JSON.stringify(original))
-      await cache.updateProduct('p1', { sku: 'NEW-SKU', name: 'New', price: 55.5, updatedAt: new Date() })
+      await cache.updateProduct('p1', { sku: 'NEW-SKU', name: 'New', price: 55.5, createdAt: new Date(), updatedAt: new Date() })
       // After update, the entry should be in L1 with updated values
       const updated = cache.l1.get('p1')!.data
       expect(updated.sku).toBe('NEW-SKU')

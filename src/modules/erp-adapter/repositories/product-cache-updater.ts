@@ -3,6 +3,7 @@ export interface IProductCacheUpdater {
     sku: string
     name: string
     price: number
+    createdAt: Date
     updatedAt: Date
   }): Promise<void>
 

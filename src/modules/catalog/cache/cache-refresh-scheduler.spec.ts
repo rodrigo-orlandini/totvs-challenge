@@ -10,7 +10,7 @@ function item(id: string): ProductResponseItem {
 }
 
 function makeRedis() {
-  const mockPipeline = { zadd: vi.fn().mockReturnThis(), exec: vi.fn().mockResolvedValue([]) }
+  const mockPipeline = { zadd: vi.fn().mockReturnThis(), pexpire: vi.fn().mockReturnThis(), exec: vi.fn().mockResolvedValue([]) }
   return {
     get: vi.fn<[], Promise<string | null>>().mockResolvedValue(null),
     set: vi.fn<[], Promise<'OK'>>().mockResolvedValue('OK'),
@@ -18,6 +18,8 @@ function makeRedis() {
     zrevrange: vi.fn<[], Promise<string[]>>().mockResolvedValue([]),
     zcard: vi.fn<[], Promise<number>>().mockResolvedValue(0),
     pipeline: vi.fn().mockReturnValue(mockPipeline),
+    pttl: vi.fn<[], Promise<number>>().mockResolvedValue(700_000),
+    pexpire: vi.fn<[], Promise<number>>().mockResolvedValue(1),
   }
 }
 
@@ -271,6 +273,47 @@ describe('CacheRefreshScheduler', () => {
       vi.advanceTimersByTime(60_000)
       scheduler.stop()
       await expect(flushMicrotasks()).resolves.toBeUndefined()
+    })
+  })
+
+  describe('sorted set TTL renewal', () => {
+    it('renews products:sorted TTL when pttl is below REFRESH_AHEAD_MS', async () => {
+      prisma = makePrisma()
+      scheduler = new CacheRefreshScheduler(cache, prisma as never)
+      redis.pttl.mockResolvedValue(60_000) // below 120_000 threshold
+
+      scheduler.start()
+      vi.advanceTimersByTime(60_000)
+      scheduler.stop()
+      await flushMicrotasks()
+
+      expect(redis.pexpire).toHaveBeenCalledWith('products:sorted', expect.any(Number))
+    })
+
+    it('renews products:sorted TTL when key has no TTL (-1)', async () => {
+      prisma = makePrisma()
+      scheduler = new CacheRefreshScheduler(cache, prisma as never)
+      redis.pttl.mockResolvedValue(-1)
+
+      scheduler.start()
+      vi.advanceTimersByTime(60_000)
+      scheduler.stop()
+      await flushMicrotasks()
+
+      expect(redis.pexpire).toHaveBeenCalledWith('products:sorted', expect.any(Number))
+    })
+
+    it('does not renew products:sorted TTL when pttl is above threshold', async () => {
+      prisma = makePrisma()
+      scheduler = new CacheRefreshScheduler(cache, prisma as never)
+      redis.pttl.mockResolvedValue(700_000) // well above 120_000 threshold
+
+      scheduler.start()
+      vi.advanceTimersByTime(60_000)
+      scheduler.stop()
+      await flushMicrotasks()
+
+      expect(redis.pexpire).not.toHaveBeenCalledWith('products:sorted', expect.any(Number))
     })
   })
 
