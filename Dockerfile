@@ -4,12 +4,12 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 FROM base AS dev
-RUN npm install
+RUN npm install && npx prisma generate
 COPY tsconfig*.json ./
 CMD ["npx", "tsx", "watch", "src/main.ts"]
 
 FROM base AS build
-RUN npm ci
+RUN npm ci && npx prisma generate
 COPY tsconfig*.json ./
 COPY src ./src
 RUN npm run build
