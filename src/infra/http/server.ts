@@ -98,8 +98,9 @@ export async function buildApp(redis: Redis): Promise<FastifyInstance> {
   const serverAdapter = new BullBoardFastifyAdapter()
   serverAdapter.setBasePath('/admin/queues')
   const checkoutQueue = new Queue('checkout-processing', { connection: redis })
-  createBullBoard({ queues: [new BullMQAdapter(erpSyncQueue), new BullMQAdapter(checkoutQueue)], serverAdapter })
-  await app.register(serverAdapter.registerPlugin(), { prefix: '/admin/queues' })
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  createBullBoard({ queues: [new BullMQAdapter(erpSyncQueue) as any, new BullMQAdapter(checkoutQueue) as any], serverAdapter })
+  await app.register(serverAdapter.registerPlugin(), { prefix: '/admin/queues', basePath: '/admin/queues' })
 
   return app
 }
