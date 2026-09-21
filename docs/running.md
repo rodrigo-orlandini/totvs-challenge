@@ -54,12 +54,20 @@ A aplicação aguarda o PostgreSQL e o Redis estarem saudáveis antes de iniciar
 As migrations rodam automaticamente via `prisma migrate dev` no entrypoint do container. Se precisar rodar manualmente:
 
 ```bash
-# Dentro do container
+# Dentro do container (recomendado — hostname resolve corretamente)
 docker compose exec app npx prisma migrate dev
+docker compose exec app npm run db:seed
+docker compose exec app npm run db:seed:erp
+```
 
-# Ou localmente (banco acessível via porta exposta)
-npm run db:migrate
-npm run db:seed
+**Fora do container:** o `.env` tem `DATABASE_URL` com hostname `casecellshop-postgres`, que só resolve dentro da rede Docker. Sobrescreva na linha do comando:
+
+```bash
+# Seed banco principal (porta 5432 exposta em localhost)
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/casecellshop_dev npm run db:seed
+
+# Seed banco ERP (porta 5434 exposta em localhost)
+DATABASE_URL=postgresql://postgres:postgres@localhost:5434/casecellshop_erp node prisma/seed.mjs --target erp
 ```
 
 ---
