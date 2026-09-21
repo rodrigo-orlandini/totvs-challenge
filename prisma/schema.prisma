@@ -57,3 +57,71 @@ model Outbox {
   @@unique([entity, erpId])
   @@map("outbox")
 }
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  CONFIRMED
+  FAILED
+  FAILED_PERMANENT
+}
+
+enum CheckoutOutboxStatus {
+  PENDING
+  ENQUEUED
+  PROCESSED
+  DEAD
+}
+
+model Order {
+  id             String      @id @default(uuid())
+  customerId     String      @map("customer_id")
+  correlationId  String      @map("correlation_id")
+  idempotencyKey String      @unique @map("idempotency_key")
+  status         OrderStatus @default(PENDING)
+  attempts       Int         @default(0)
+  lastError      String?     @map("last_error")
+  createdAt      DateTime    @default(now()) @map("created_at")
+  updatedAt      DateTime    @updatedAt @map("updated_at")
+  items          OrderItem[]
+  reservations   StockReservation[]
+  outbox         CheckoutOutbox?
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String @id @default(uuid())
+  orderId   String @map("order_id")
+  productId String @map("product_id")
+  quantity  Int
+  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
+
+model StockReservation {
+  id         String    @id @default(uuid())
+  orderId    String    @map("order_id")
+  productId  String    @map("product_id")
+  quantity   Int
+  expiresAt  DateTime  @map("expires_at")
+  releasedAt DateTime? @map("released_at")
+  order      Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([productId, expiresAt, releasedAt])
+  @@map("stock_reservations")
+}
+
+model CheckoutOutbox {
+  id          String              @id @default(uuid())
+  orderId     String              @unique @map("order_id")
+  status      CheckoutOutboxStatus @default(PENDING)
+  attempts    Int                 @default(0)
+  nextRetryAt DateTime?           @map("next_retry_at")
+  error       String?
+  createdAt   DateTime            @default(now()) @map("created_at")
+  order       Order               @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("checkout_outbox")
+}
