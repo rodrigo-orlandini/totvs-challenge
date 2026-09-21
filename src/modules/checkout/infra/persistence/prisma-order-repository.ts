@@ -55,7 +55,9 @@ export class PrismaOrderRepository implements IOrderRepository {
       })
 
       if (data.reservations.length > 0) {
-        await tx.stockReservation.createMany({ data: data.reservations })
+        await tx.stockReservation.createMany({
+          data: data.reservations.map(r => ({ ...r, orderId: data.id })),
+        })
       }
 
       await tx.checkoutOutbox.create({

@@ -6,6 +6,8 @@ import swaggerUi from '@fastify/swagger-ui'
 import { randomUUID } from 'node:crypto'
 import { container } from 'tsyringe'
 import { ProductController } from '@modules/catalog/infra/http/product-controller'
+import { CheckoutController } from '@modules/checkout/infra/http/checkout-controller'
+import { OrderStatusController } from '@modules/checkout/infra/http/order-status-controller'
 import { createBullBoard } from '@bull-board/api'
 import { BullMQAdapter } from '@bull-board/api/bullMQAdapter'
 import { FastifyAdapter as BullBoardFastifyAdapter } from '@bull-board/fastify'
@@ -29,6 +31,8 @@ export async function buildApp(redis: Redis): Promise<FastifyInstance> {
       },
       tags: [
         { name: 'Products', description: 'Vitrine de produtos' },
+        { name: 'Checkout', description: 'Fluxo de compra assíncrono' },
+        { name: 'Orders', description: 'Consulta de pedidos' },
       ],
     },
   })
@@ -54,10 +58,16 @@ export async function buildApp(redis: Redis): Promise<FastifyInstance> {
   const productController = container.resolve(ProductController)
   await productController.registerRoutes(app)
 
+  const checkoutController = container.resolve(CheckoutController)
+  const orderStatusController = container.resolve(OrderStatusController)
+  await checkoutController.registerRoutes(app)
+  await orderStatusController.registerRoutes(app)
+
   const erpSyncQueue = new Queue('erp-sync', { connection: redis })
   const serverAdapter = new BullBoardFastifyAdapter()
   serverAdapter.setBasePath('/admin/queues')
-  createBullBoard({ queues: [new BullMQAdapter(erpSyncQueue)], serverAdapter })
+  const checkoutQueue = new Queue('checkout-processing', { connection: redis })
+  createBullBoard({ queues: [new BullMQAdapter(erpSyncQueue), new BullMQAdapter(checkoutQueue)], serverAdapter })
   await app.register(serverAdapter.registerPlugin(), { prefix: '/admin/queues' })
 
   return app

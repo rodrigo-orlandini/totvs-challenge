@@ -2,11 +2,14 @@ import 'reflect-metadata'
 import { registerSharedInfra } from '@shared/container'
 import { registerCatalogModule } from '@modules/catalog/container'
 import { registerErpAdapterModule } from '@modules/erp-adapter/container'
+import { registerCheckoutModule } from '@modules/checkout/container'
 import { buildApp } from '@infra/http/server'
 import { BullMQRelay } from '@modules/erp-adapter/infra/queue/bullmq-relay'
 import { BullMQSyncWorker } from '@modules/erp-adapter/infra/queue/bullmq-sync-worker'
 import { ErpScheduler } from '@modules/erp-adapter/infra/scheduler/erp-scheduler'
 import { CacheRefreshScheduler } from '@modules/catalog/cache/cache-refresh-scheduler'
+import { BullMQCheckoutRelay } from '@modules/checkout/infra/queue/bullmq-checkout-relay'
+import { BullMQCheckoutWorker } from '@modules/checkout/infra/queue/bullmq-checkout-worker'
 import { container } from 'tsyringe'
 import Redis from 'ioredis'
 
@@ -17,6 +20,7 @@ async function bootstrap(): Promise<void> {
   registerSharedInfra()
   registerCatalogModule(redis)
   registerErpAdapterModule(redis)
+  registerCheckoutModule(redis)
 
   const app = await buildApp(redis)
   const port = Number(process.env.PORT ?? 3000)
@@ -31,6 +35,11 @@ async function bootstrap(): Promise<void> {
   worker.start()
   erpScheduler.start()
   cacheScheduler.start()
+
+  const checkoutRelay = container.resolve(BullMQCheckoutRelay)
+  const checkoutWorker = container.resolve(BullMQCheckoutWorker)
+  checkoutRelay.start()
+  checkoutWorker.start()
 }
 
 bootstrap().catch((err) => {
