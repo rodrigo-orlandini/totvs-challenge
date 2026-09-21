@@ -17,7 +17,12 @@ Serviços:
 
 Variáveis de ambiente para habilitar exportação de traces:
 ```bash
+# Quando o app roda localmente (fora do Docker):
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
+
+# Quando o app roda em Docker (mesmo host que a stack de observabilidade):
+OTEL_EXPORTER_OTLP_ENDPOINT=http://host.docker.internal:4318
+
 OTEL_SERVICE_NAME=casecellshop
 ```
 
@@ -54,7 +59,7 @@ Sem essas variáveis, o app usa `ConsoleSpanExporter` — spans aparecem no stdo
 ```yaml
 # Cache hit rate abaixo de 70% por 5 minutos
 expr: |
-  rate(cache_hits_total[5m]) / (rate(cache_hits_total[5m]) + rate(cache_misses_total[5m])) < 0.70
+  sum(rate(cache_hits_total[5m])) / (sum(rate(cache_hits_total[5m])) + sum(rate(cache_misses_total[5m]))) < 0.70
 for: 5m
 labels:
   severity: warning

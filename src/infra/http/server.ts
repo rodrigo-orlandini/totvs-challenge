@@ -13,7 +13,8 @@ import { BullMQAdapter } from '@bull-board/api/bullMQAdapter'
 import { FastifyAdapter as BullBoardFastifyAdapter } from '@bull-board/fastify'
 import { Queue } from 'bullmq'
 import type { Redis } from 'ioredis'
-import { tracer, SpanStatusCode } from '@shared/observability/tracer'
+import { tracer, SpanStatusCode, otelContext } from '@shared/observability/tracer'
+import { trace } from '@opentelemetry/api'
 import { enterContext } from '@shared/observability/context'
 import { register } from '@shared/observability/metrics'
 
@@ -47,7 +48,7 @@ export async function buildApp(redis: Redis): Promise<FastifyInstance> {
     },
   })
 
-  app.addHook('onRequest', async (request: FastifyRequest, reply: FastifyReply) => {
+  app.addHook('onRequest', (request: FastifyRequest, reply: FastifyReply, done: () => void) => {
     const correlationId =
       (request.headers['x-correlation-id'] as string | undefined) ?? request.id
     request.correlationId = correlationId
@@ -68,6 +69,8 @@ export async function buildApp(redis: Redis): Promise<FastifyInstance> {
       { correlationId, method: request.method, url: request.url },
       'incoming request',
     )
+
+    otelContext.with(trace.setSpan(otelContext.active(), span), done)
   })
 
   app.addHook('onResponse', async (request: FastifyRequest, reply: FastifyReply) => {

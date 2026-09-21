@@ -26,7 +26,7 @@ services:
   promtail:
     image: grafana/promtail:latest
     volumes:
-      - /var/log:/var/log:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./grafana/promtail.yml:/etc/promtail/config.yml:ro
     command: -config.file=/etc/promtail/config.yml
 

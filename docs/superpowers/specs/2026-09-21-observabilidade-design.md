@@ -28,6 +28,8 @@ BullMQ Job (call stack separado, contexto propagado via job.data)
 
 ### Propagação de contexto
 
+> **Nota de implementação:** A propagação W3C traceparent via relay foi descartada na implementação final. O relay corre num `setInterval` sem contexto HTTP ativo, impossibilitando a ligação de traces HTTP→worker. Traces são raízes separadas correlacionadas por `correlationId` e `orderId` nos logs e spans. Ver `docs/observability.md` para a arquitetura atual.
+
 Dois mecanismos paralelos, responsabilidades distintas:
 
 **AsyncLocalStorage** (`src/shared/observability/context.ts`):

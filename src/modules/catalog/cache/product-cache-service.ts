@@ -49,10 +49,10 @@ export class ProductCacheService implements IProductCacheUpdater {
   }
 
   async getProduct(id: string): Promise<ProductResponseItem | null> {
-    const log = getLogger()
-    const end = metrics.cacheOperationDuration.startTimer({ operation: 'get' })
+    const opStart = Date.now()
 
     return tracer.startActiveSpan('cache.get', { attributes: { 'cache.key': `product:${id}` } }, async (span) => {
+      const log = getLogger()
       try {
         const entry = this.l1.get(id)
         if (entry) {
@@ -61,7 +61,7 @@ export class ProductCacheService implements IProductCacheUpdater {
             metrics.cacheHits.inc({ layer: 'l1' })
             span.setAttribute('cache.result', 'l1_hit')
             log.debug({ id }, 'cache.l1.hit')
-            end()
+            metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
             return entry.data
           }
           this.l1.delete(id)
@@ -72,7 +72,7 @@ export class ProductCacheService implements IProductCacheUpdater {
             metrics.cacheMisses.inc()
             span.setAttribute('cache.result', 'miss')
             log.debug({ id }, 'cache.miss')
-            end()
+            metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
             return null
           }
           let data: ProductResponseItem
@@ -80,19 +80,19 @@ export class ProductCacheService implements IProductCacheUpdater {
             data = JSON.parse(raw) as ProductResponseItem
           } catch {
             log.warn({ id }, 'cache.l2.parse.error')
-            end()
+            metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
             return null
           }
           metrics.cacheHits.inc({ layer: 'l2' })
           span.setAttribute('cache.result', 'l2_hit')
           log.debug({ id }, 'cache.l2.hit')
           this.writeL1(id, data)
-          end()
+          metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
           return data
         } catch (err) {
           span.setStatus({ code: SpanStatusCode.ERROR })
           log.warn({ id, err }, 'cache.l2.get.error')
-          end()
+          metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
           return null
         }
       } finally {

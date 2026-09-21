@@ -19,7 +19,7 @@
 - `logger` default export kept for backward compatibility — existing imports unchanged
 - Spans are created manually; no OTel auto-instrumentation packages
 - OTel exporter: `OTEL_EXPORTER_OTLP_ENDPOINT` env → OTLP HTTP; unset → `ConsoleSpanExporter` (app never crashes without Tempo)
-- Never mention PDFs, TOTVS test, or external challenge sources in any file
+- Never reference external test specifications or challenge documents in any project file
 - All commits end with `Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>`
 
 ---

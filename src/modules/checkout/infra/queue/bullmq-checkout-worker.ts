@@ -31,7 +31,6 @@ export class BullMQCheckoutWorker {
       async (job) => {
         const { orderId } = job.data
         enterContext({ correlationId: job.id ?? orderId, orderId })
-        const log = getLogger()
 
         return tracer.startActiveSpan('checkout.process.job', {
           attributes: {
@@ -40,6 +39,7 @@ export class BullMQCheckoutWorker {
             'messaging.bullmq.attempts': job.attemptsMade,
           },
         }, async (span) => {
+          const log = getLogger()
           const jobStart = Date.now()
           try {
             log.debug({ jobId: job.id, orderId, attempt: job.attemptsMade }, 'checkout.job.start')
