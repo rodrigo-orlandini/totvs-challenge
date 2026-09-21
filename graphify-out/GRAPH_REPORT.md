@@ -1,32 +1,32 @@
 # Graph Report - totvs  (2026-09-20)
 
 ## Corpus Check
-- 96 files · ~28,133 words
+- 107 files · ~40,848 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 34 file(s) not represented in the graph (top: (none) 32, .example 1, .prisma 1)
 
 ## Summary
-- 438 nodes · 917 edges · 21 communities (17 shown, 4 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 24 edges (avg confidence: 0.83)
+- 514 nodes · 1082 edges · 27 communities (19 shown, 8 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 46 edges (avg confidence: 0.83)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5d7ddb91`
+- Built from commit: `e59fb671`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- process-sync-job.spec.ts
-- process-sync-job.ts
-- IOutboxRepository
-- list-products.ts
-- ErpProduct
-- package.json
 - erp-adapter/container.ts
+- scripts
+- inject
+- injectable
+- IOutboxRepository
+- package.json
+- vitest
 - ERP Sync Design Spec
 - compilerOptions
-- scripts
-- dependencies
+- prisma-product-repository.integration-spec.ts
+- catalog/container.ts
 - seed.mjs
 - @prisma/client
 - tsconfig.build.json
@@ -37,30 +37,36 @@
 - Prompt 01: Vitrine Inicial
 - 03 — Git Workflow e CI Pipeline
 - CLAUDE.md
+- inject
+- injectable
+- 04 — Cache da Vitrine
+- poll-erp-products.ts
+- ProductCacheService
+- main.ts
 
 ## God Nodes (most connected - your core abstractions)
-1. `IOutboxRepository` - 22 edges
-2. `tsyringe` - 18 edges
-3. `scripts` - 18 edges
-4. `DomainError` - 17 edges
-5. `ErpProduct` - 16 edges
-6. `ErpStockFlow` - 15 edges
-7. `PrismaOutboxRepository` - 15 edges
-8. `registerErpAdapterModule()` - 15 edges
-9. `vitest` - 15 edges
-10. `@prisma/client` - 15 edges
+1. `ProductCacheService` - 23 edges
+2. `IOutboxRepository` - 21 edges
+3. `vitest` - 19 edges
+4. `tsyringe` - 18 edges
+5. `scripts` - 18 edges
+6. `@prisma/client` - 17 edges
+7. `ErpProduct` - 16 edges
+8. `DomainError` - 16 edges
+9. `reflect-metadata` - 16 edges
+10. `ErpStockFlow` - 15 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Arch Reviewer Agent` --references--> `Dependency Injection via tsyringe`  [EXTRACTED]
-  .claude/agents/arch-reviewer.md → src/shared/core/architecture-rules.md
-- `Arch Reviewer Agent` --references--> `Kebab-case Naming Convention`  [EXTRACTED]
-  .claude/agents/arch-reviewer.md → src/shared/core/architecture-rules.md
-- `Docker Compose Test Environment` --conceptually_related_to--> `Test Strategy (Unit + Integration)`  [INFERRED]
-  docker-compose.test.yml → src/shared/core/architecture-rules.md
-- `Modular Monolith Clean Architecture Design` --references--> `Clean Architecture Dependency Rule`  [INFERRED]
-  docs/superpowers/specs/2026-09-19-modular-monolith-clean-architecture-design.md → src/shared/core/architecture-rules.md
-- `Modular Monolith Clean Architecture Design` --references--> `Either<DomainError, T> Pattern`  [INFERRED]
-  docs/superpowers/specs/2026-09-19-modular-monolith-clean-architecture-design.md → src/shared/core/architecture-rules.md
+- `Invalidação / atualização por sync — `ProcessSyncJobUseCase`` --references--> `ProcessSyncJobUseCase`  [INFERRED]
+  docs/superpowers/specs/2026-09-20-cache-vitrine-design.md → src/modules/erp-adapter/use-cases/process-sync-job/process-sync-job.ts
+- `Camadas de cache` --references--> `ProductResponseItem`  [INFERRED]
+  docs/superpowers/specs/2026-09-20-cache-vitrine-design.md → src/modules/catalog/dtos/list-products-dto.ts
+- `Constraints` --references--> `ListProductsUseCase`  [INFERRED]
+  docs/superpowers/specs/2026-09-20-cache-vitrine-design.md → src/modules/catalog/use-cases/list-products/list-products.ts
+- `Contexto` --references--> `ListProductsUseCase`  [INFERRED]
+  docs/superpowers/specs/2026-09-20-cache-vitrine-design.md → src/modules/catalog/use-cases/list-products/list-products.ts
+- `Contexto` --references--> `ListProductsUseCase`  [INFERRED]
+  prompts/04-cache-vitrine.md → src/modules/catalog/use-cases/list-products/list-products.ts
 
 ## Import Cycles
 - None detected.
@@ -70,35 +76,27 @@
 - **ERP Sync Data Flow** — erp_sync_worker_threads, erp_sync_transactional_outbox, erp_sync_bullmq, erp_sync_dlq [EXTRACTED 1.00]
 - **Development Workflow Toolset** — claude_agents_arch_reviewer, claude_agents_tdd_agent, prompts_00_arch [INFERRED 0.95]
 
-## Communities (21 total, 4 thin omitted)
+## Communities (27 total, 8 thin omitted)
 
-### Community 0 - "process-sync-job.spec.ts"
+### Community 0 - "erp-adapter/container.ts"
+Cohesion: 0.08
+Nodes (20): reflect-metadata, tsyringe, registerErpAdapterModule(), SyncEntity, SyncJobPayload, PrismaCatalogProductWriteRepository, inject, injectable (+12 more)
+
+### Community 1 - "scripts"
 Cohesion: 0.11
-Nodes (11): PrismaCatalogProductWriteRepository, inject, injectable, PrismaCatalogStockFlowWriteRepository, inject, injectable, ICatalogProductWriteRepository, ICatalogStockFlowWriteRepository (+3 more)
+Nodes (18): scripts, build, db:generate, db:migrate, db:migrate:erp, db:migrate:test, db:seed, db:seed:erp (+10 more)
 
-### Community 1 - "process-sync-job.ts"
-Cohesion: 0.06
-Nodes (31): ref_path, vitest, Product, ProductProps, makePrice(), makeSKU(), InvalidPriceError, ProductPrice (+23 more)
-
-### Community 2 - "IOutboxRepository"
-Cohesion: 0.05
-Nodes (21): ErpStockFlow, OutboxEntry, OutboxStatus, PrismaErpStockFlowRepository, inject, injectable, PrismaOutboxRepository, inject (+13 more)
-
-### Community 3 - "list-products.ts"
-Cohesion: 0.09
-Nodes (20): ListProductsInput, ListProductsOutput, ProductResponseItem, inject, prisma, repo, PrismaProductRepository, inject (+12 more)
-
-### Community 4 - "ErpProduct"
-Cohesion: 0.18
-Nodes (9): ErpProduct, PrismaErpProductRepository, inject, injectable, prisma, product, repo, IErpProductRepository (+1 more)
+### Community 4 - "IOutboxRepository"
+Cohesion: 0.08
+Nodes (18): ErpStockFlow, OutboxEntry, OutboxStatus, PrismaErpStockFlowRepository, inject, injectable, PrismaOutboxRepository, inject (+10 more)
 
 ### Community 5 - "package.json"
-Cohesion: 0.06
-Nodes (35): description, devDependencies, eslint, prisma, tsc-alias, tsx, @types/node, @types/uuid (+27 more)
+Cohesion: 0.04
+Nodes (46): dependencies, @bull-board/api, @bull-board/fastify, bullmq, fastify, @fastify/swagger, @fastify/swagger-ui, ioredis (+38 more)
 
-### Community 6 - "erp-adapter/container.ts"
-Cohesion: 0.10
-Nodes (24): bullmq, fastify, ioredis, tsyringe, fastify, FastifyRequest, buildApp(), bootstrap() (+16 more)
+### Community 6 - "vitest"
+Cohesion: 0.07
+Nodes (20): ref_path, vitest, Product, ProductProps, makePrice(), makeSKU(), InvalidPriceError, ProductPrice (+12 more)
 
 ### Community 7 - "ERP Sync Design Spec"
 Cohesion: 0.12
@@ -108,21 +106,21 @@ Nodes (24): Clean Architecture Dependency Rule, Dependency Injection via tsyring
 Cohesion: 0.10
 Nodes (19): compilerOptions, emitDecoratorMetadata, esModuleInterop, experimentalDecorators, forceConsistentCasingInFileNames, lib, module, outDir (+11 more)
 
-### Community 9 - "scripts"
-Cohesion: 0.11
-Nodes (18): scripts, build, db:generate, db:migrate, db:migrate:erp, db:migrate:test, db:seed, db:seed:erp (+10 more)
+### Community 9 - "prisma-product-repository.integration-spec.ts"
+Cohesion: 0.20
+Nodes (5): inject, injectable, prisma, repo, PrismaProductRepository
 
-### Community 10 - "dependencies"
-Cohesion: 0.14
-Nodes (14): dependencies, @bull-board/api, @bull-board/fastify, bullmq, fastify, @fastify/swagger, @fastify/swagger-ui, ioredis (+6 more)
+### Community 10 - "catalog/container.ts"
+Cohesion: 0.07
+Nodes (25): fastify, fastify, FastifyRequest, IL1Entry, jitteredTtlSec(), ListProductsInput, ListProductsOutput, ProductResponseItem (+17 more)
 
 ### Community 11 - "seed.mjs"
 Cohesion: 0.27
 Nodes (9): BRANDS, buildSKU(), COLORS, main(), MATERIALS, prisma, randomPrice(), slugify() (+1 more)
 
 ### Community 12 - "@prisma/client"
-Cohesion: 0.14
-Nodes (12): ref_node_path, ref_node_worker_threads, @prisma/client, reflect-metadata, PrismaSyncCursorRepository, inject, injectable, WORKER_FILES (+4 more)
+Cohesion: 0.10
+Nodes (16): ref_node_path, ref_node_worker_threads, pino, @prisma/client, PrismaSyncCursorRepository, inject, injectable, ErpScheduler (+8 more)
 
 ### Community 13 - "tsconfig.build.json"
 Cohesion: 0.50
@@ -140,25 +138,41 @@ Nodes (7): 03 — Git Workflow e CI Pipeline, Contexto, Critérios de Direcionam
 Cohesion: 0.50
 Nodes (3): Command output, Docker, Prompts
 
+### Community 23 - "04 — Cache da Vitrine"
+Cohesion: 0.09
+Nodes (18): Arquitetura, Cache da Vitrine — Design Spec, Camadas de cache, Constraints, Contexto, Estrutura de arquivos, Fluxo de leitura — `CachedProductRepository.findAll({ page, limit })`, Invalidação / atualização por sync — `ProcessSyncJobUseCase` (+10 more)
+
+### Community 24 - "poll-erp-products.ts"
+Cohesion: 0.10
+Nodes (16): ErpProduct, PrismaErpProductRepository, inject, injectable, prisma, product, repo, IErpProductRepository (+8 more)
+
+### Community 25 - "ProductCacheService"
+Cohesion: 0.15
+Nodes (4): CacheRefreshScheduler, jitteredTtlMs(), ProductCacheService, CachedProductRepository
+
+### Community 28 - "main.ts"
+Cohesion: 0.12
+Nodes (15): @bull-board/api, @bull-board/fastify, bullmq, ioredis, buildApp(), bootstrap(), registerCatalogModule(), ProductController (+7 more)
+
 ## Knowledge Gaps
-- **123 isolated node(s):** `Command output`, `Prompts`, `Docker`, `Objetivo`, `Contexto` (+118 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 191 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **138 isolated node(s):** `IL1Entry`, `ProcessSyncJobInput`, `PaginationMeta`, `WorkerEntity`, `ListProductsQuery` (+133 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 221 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `vitest` connect `process-sync-job.ts` to `process-sync-job.spec.ts`, `IOutboxRepository`, `list-products.ts`, `ErpProduct`, `package.json`, `erp-adapter/container.ts`, `@prisma/client`?**
-  _High betweenness centrality (0.094) - this node is a cross-community bridge._
-- **Why does `tsyringe` connect `erp-adapter/container.ts` to `process-sync-job.spec.ts`, `process-sync-job.ts`, `IOutboxRepository`, `list-products.ts`, `ErpProduct`, `package.json`, `@prisma/client`?**
-  _High betweenness centrality (0.089) - this node is a cross-community bridge._
-- **Why does `scripts` connect `scripts` to `package.json`?**
-  _High betweenness centrality (0.064) - this node is a cross-community bridge._
-- **What connects `Command output`, `Prompts`, `Docker` to the rest of the system?**
-  _123 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `process-sync-job.spec.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.10541310541310542 - nodes in this community are weakly interconnected._
-- **Should `process-sync-job.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.059154929577464786 - nodes in this community are weakly interconnected._
+- **Why does `vitest` connect `vitest` to `erp-adapter/container.ts`, `IOutboxRepository`, `package.json`, `prisma-product-repository.integration-spec.ts`, `catalog/container.ts`, `@prisma/client`, `poll-erp-products.ts`, `main.ts`?**
+  _High betweenness centrality (0.102) - this node is a cross-community bridge._
+- **Why does `reflect-metadata` connect `erp-adapter/container.ts` to `IOutboxRepository`, `package.json`, `catalog/container.ts`, `@prisma/client`, `poll-erp-products.ts`, `main.ts`?**
+  _High betweenness centrality (0.073) - this node is a cross-community bridge._
+- **Why does `tsyringe` connect `erp-adapter/container.ts` to `IOutboxRepository`, `package.json`, `catalog/container.ts`, `@prisma/client`, `poll-erp-products.ts`, `main.ts`?**
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
+- **What connects `IL1Entry`, `ProcessSyncJobInput`, `PaginationMeta` to the rest of the system?**
+  _138 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `erp-adapter/container.ts` be split into smaller, more focused modules?**
+  _Cohesion score 0.08 - nodes in this community are weakly interconnected._
+- **Should `scripts` be split into smaller, more focused modules?**
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
 - **Should `IOutboxRepository` be split into smaller, more focused modules?**
-  _Cohesion score 0.05487269534679543 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07686274509803921 - nodes in this community are weakly interconnected._

@@ -30,15 +30,15 @@
     "semantic_hash": ""
   },
   "src/main.ts": {
-    "mtime": 1789941026.847116,
-    "seen": 1789943509.0228164,
-    "ast_hash": "a6f9fea249cc8391d46ce169f544c417",
+    "mtime": 1789949451.2932975,
+    "seen": 1789949482.187531,
+    "ast_hash": "a7e60d3649e2469e4026be1ec4e6c6df",
     "semantic_hash": ""
   },
   "src/modules/catalog/container.ts": {
-    "mtime": 1789941026.8484318,
-    "seen": 1789943509.0228164,
-    "ast_hash": "d8c142578d3a1d52f6302abdbecba68c",
+    "mtime": 1789949438.5331466,
+    "seen": 1789949482.187531,
+    "ast_hash": "ace30c2201365513757f3a8f13c936cc",
     "semantic_hash": ""
   },
   "src/modules/catalog/dtos/list-products-dto.ts": {
@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   "src/modules/catalog/infra/persistence/prisma-product-repository.ts": {
-    "mtime": 1789941026.856825,
-    "seen": 1789943509.0228164,
-    "ast_hash": "bbcf757bd180aa2d5f94986e1c2ab181",
+    "mtime": 1789943924.130751,
+    "seen": 1789944092.7090287,
+    "ast_hash": "9dbee94efcaa84ec4b8f3ca38e7d9665",
     "semantic_hash": ""
   },
   "src/modules/catalog/mappers/product-mapper.spec.ts": {
@@ -144,9 +144,9 @@
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/container.ts": {
-    "mtime": 1789941026.8671002,
-    "seen": 1789943509.0228164,
-    "ast_hash": "c743d8b80fbcc53301c70815b860f076",
+    "mtime": 1789949444.9512854,
+    "seen": 1789949482.187531,
+    "ast_hash": "30f82c41065af9244aa079edf66ee8ab",
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/dtos/erp-product-dto.ts": {
@@ -252,9 +252,9 @@
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/scheduler/erp-scheduler.spec.ts": {
-    "mtime": 1789941026.8861983,
-    "seen": 1789943509.0228164,
-    "ast_hash": "6937f40165dc29b193cc111bfa864e3d",
+    "mtime": 1789944031.036476,
+    "seen": 1789944092.7090287,
+    "ast_hash": "359f262bd7c6e51d82ad0ceda482dc3d",
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/infra/scheduler/erp-scheduler.ts": {
@@ -318,9 +318,9 @@
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/poll-erp-products/poll-erp-products.spec.ts": {
-    "mtime": 1789941026.8980072,
-    "seen": 1789943509.0228164,
-    "ast_hash": "0a37b43de30a40bef643c5fa4f462d3a",
+    "mtime": 1789943945.1942377,
+    "seen": 1789944092.7090287,
+    "ast_hash": "58219c59befe2447eac51a5438753d7c",
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/poll-erp-products/poll-erp-products.ts": {
@@ -360,15 +360,15 @@
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/process-sync-job/process-sync-job.spec.ts": {
-    "mtime": 1789941026.9091027,
-    "seen": 1789943509.0228164,
-    "ast_hash": "43d07ea0e8514533e1403764cab92107",
+    "mtime": 1789950128.2057116,
+    "seen": 1789950201.3479161,
+    "ast_hash": "c601dd8778071694eab280a63e1fe637",
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/process-sync-job/process-sync-job.ts": {
-    "mtime": 1789941026.9101985,
-    "seen": 1789943509.0228164,
-    "ast_hash": "26c81f532aa6bba19209109a37daf64a",
+    "mtime": 1789950082.4310431,
+    "seen": 1789950201.3479161,
+    "ast_hash": "a4e332855bc2241d61df64baad6dcb6a",
     "semantic_hash": ""
   },
   "src/shared/container.ts": {
@@ -564,9 +564,9 @@
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
-    "mtime": 1789943471.8212974,
-    "seen": 1789943509.0228164,
-    "ast_hash": "eeac1fa80c7462fb6c677ab1a4b44a5e",
+    "mtime": 1789944347.3519018,
+    "seen": 1789944401.9407969,
+    "ast_hash": "eb538dc309ac109131007313641b7809",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -591,6 +591,72 @@
     "mtime": 1789822421.4509788,
     "seen": 1789943509.0228164,
     "ast_hash": "e7141751091b69b47f241195293a4763",
+    "semantic_hash": ""
+  },
+  "vitest.coverage.ts": {
+    "mtime": 1789949453.9801424,
+    "seen": 1789949482.187531,
+    "ast_hash": "c8956db6eb4847a9b8cb3e976a4b5335",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-09-20-cache-vitrine-design.md": {
+    "mtime": 1789947359.5658782,
+    "seen": 1789947366.7568738,
+    "ast_hash": "3f171b3049a718f76eb778ab2e8d3d14",
+    "semantic_hash": ""
+  },
+  "prompts/04-cache-vitrine.md": {
+    "mtime": 1789945447.0770886,
+    "seen": 1789947366.7568738,
+    "ast_hash": "3a97144c0489db34dee19c5db8c1acff",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/cache/product-cache-service.spec.ts": {
+    "mtime": 1789950142.9120004,
+    "seen": 1789950201.3479161,
+    "ast_hash": "996ecb2a202379d312b003bea7a0a902",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/cache/product-cache-service.ts": {
+    "mtime": 1789950111.9859471,
+    "seen": 1789950201.3479161,
+    "ast_hash": "3e3f1c09b10c13beae1c25b98c4b6313",
+    "semantic_hash": ""
+  },
+  "src/modules/erp-adapter/repositories/product-cache-updater.ts": {
+    "mtime": 1789950079.0094914,
+    "seen": 1789950201.3479161,
+    "ast_hash": "d6daae163859d8d473c2b084fd77753a",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-09-20-cache-vitrine.md": {
+    "mtime": 1789947937.1913395,
+    "seen": 1789948204.5964224,
+    "ast_hash": "9ec4549487e5590153e39c9537214739",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/infra/persistence/cached-product-repository.spec.ts": {
+    "mtime": 1789950229.8985586,
+    "seen": 1789950243.7818463,
+    "ast_hash": "e352271d83aa0252fac60f5f1daa37e7",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/infra/persistence/cached-product-repository.ts": {
+    "mtime": 1789948632.8563519,
+    "seen": 1789948697.0310426,
+    "ast_hash": "3297cdcb70517e864c4319b1a2b67c0d",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/cache/cache-refresh-scheduler.spec.ts": {
+    "mtime": 1789950155.8429675,
+    "seen": 1789950201.3479161,
+    "ast_hash": "c921e081a1d2cde50d63aa347adca50a",
+    "semantic_hash": ""
+  },
+  "src/modules/catalog/cache/cache-refresh-scheduler.ts": {
+    "mtime": 1789950120.6941085,
+    "seen": 1789950201.3479161,
+    "ast_hash": "8cfd321954378764569174d319e8c9af",
     "semantic_hash": ""
   }
 }
