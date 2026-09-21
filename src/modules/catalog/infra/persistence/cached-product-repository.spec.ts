@@ -10,7 +10,7 @@ function item(id: string, overrides: Partial<ProductResponseItem> = {}): Product
 }
 
 function makeRedis() {
-  const mockPipeline = { zadd: vi.fn().mockReturnThis(), exec: vi.fn().mockResolvedValue([]) }
+  const mockPipeline = { zadd: vi.fn().mockReturnThis(), pexpire: vi.fn().mockReturnThis(), exec: vi.fn().mockResolvedValue([]) }
   return {
     get: vi.fn<[], Promise<string | null>>().mockResolvedValue(null),
     set: vi.fn<[], Promise<'OK'>>().mockResolvedValue('OK'),
