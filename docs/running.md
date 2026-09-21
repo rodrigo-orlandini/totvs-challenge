@@ -51,23 +51,32 @@ A aplicação aguarda o PostgreSQL e o Redis estarem saudáveis antes de iniciar
 
 ## 3. Executar migrations e seed
 
-As migrations rodam automaticamente via `prisma migrate dev` no entrypoint do container. Se precisar rodar manualmente:
+As migrations **não rodam automaticamente** — é preciso executar manualmente após subir os containers.
+
+### Banco principal
 
 ```bash
-# Dentro do container (recomendado — hostname resolve corretamente)
-docker compose exec app npx prisma migrate dev
+docker compose exec app npm run db:migrate
 docker compose exec app npm run db:seed
+```
+
+### Banco ERP
+
+```bash
+docker compose exec app npm run db:migrate:erp
 docker compose exec app npm run db:seed:erp
 ```
 
-**Fora do container:** o `.env` tem `DATABASE_URL` com hostname `casecellshop-postgres`, que só resolve dentro da rede Docker. Sobrescreva na linha do comando:
+> Os scripts usam `DATABASE_URL` e `ERP_DATABASE_URL` do `.env`, que já apontam para os hostnames corretos dentro da rede Docker (`casecellshop-postgres` e `casecellshop-postgres-erp`). Não é preciso sobrescrever nada.
+
+**Fora do container** (banco acessível via porta exposta em localhost): sobrescreva a variável na linha do comando:
 
 ```bash
-# Seed banco principal (porta 5432 exposta em localhost)
+# Banco principal
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/casecellshop_dev npm run db:seed
 
-# Seed banco ERP (porta 5434 exposta em localhost)
-DATABASE_URL=postgresql://postgres:postgres@localhost:5434/casecellshop_erp node prisma/seed.mjs --target erp
+# Banco ERP
+ERP_DATABASE_URL=postgresql://postgres:postgres@localhost:5434/casecellshop_erp node prisma/seed.mjs --target erp
 ```
 
 ---
