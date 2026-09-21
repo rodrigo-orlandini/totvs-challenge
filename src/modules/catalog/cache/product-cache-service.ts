@@ -1,7 +1,9 @@
 import type { Redis } from 'ioredis'
 import type { ProductResponseItem } from '../dtos/list-products-dto'
 import type { IProductCacheUpdater } from '@modules/erp-adapter/repositories/product-cache-updater'
-import { logger } from '@shared/observability/logger'
+import { getLogger } from '@shared/observability/logger'
+import { tracer, SpanStatusCode } from '@shared/observability/tracer'
+import { metrics } from '@shared/observability/metrics'
 
 interface IL1Entry {
   data: ProductResponseItem
@@ -34,7 +36,10 @@ export class ProductCacheService implements IProductCacheUpdater {
         minKey = key
       }
     }
-    if (minKey) this.l1.delete(minKey)
+    if (minKey) {
+      this.l1.delete(minKey)
+      metrics.cacheEvictions.inc()
+    }
   }
 
   private writeL1(id: string, data: ProductResponseItem): void {
@@ -44,43 +49,65 @@ export class ProductCacheService implements IProductCacheUpdater {
   }
 
   async getProduct(id: string): Promise<ProductResponseItem | null> {
-    const entry = this.l1.get(id)
-    if (entry) {
-      if (entry.expiresAt > Date.now()) {
-        entry.frequency++
-        logger.debug({ id }, 'cache.l1.hit')
-        return entry.data
-      }
-      this.l1.delete(id)
-    }
-    try {
-      const raw = await this.redis.get(`product:${id}`)
-      if (!raw) {
-        logger.debug({ id }, 'cache.miss')
-        return null
-      }
-      let data: ProductResponseItem
+    const opStart = Date.now()
+
+    return tracer.startActiveSpan('cache.get', { attributes: { 'cache.key': `product:${id}` } }, async (span) => {
+      const log = getLogger()
       try {
-        data = JSON.parse(raw) as ProductResponseItem
-      } catch {
-        logger.warn({ id }, 'cache.l2.parse.error')
-        return null
+        const entry = this.l1.get(id)
+        if (entry) {
+          if (entry.expiresAt > Date.now()) {
+            entry.frequency++
+            metrics.cacheHits.inc({ layer: 'l1' })
+            span.setAttribute('cache.result', 'l1_hit')
+            log.debug({ id }, 'cache.l1.hit')
+            metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
+            return entry.data
+          }
+          this.l1.delete(id)
+        }
+        try {
+          const raw = await this.redis.get(`product:${id}`)
+          if (!raw) {
+            metrics.cacheMisses.inc()
+            span.setAttribute('cache.result', 'miss')
+            log.debug({ id }, 'cache.miss')
+            metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
+            return null
+          }
+          let data: ProductResponseItem
+          try {
+            data = JSON.parse(raw) as ProductResponseItem
+          } catch {
+            log.warn({ id }, 'cache.l2.parse.error')
+            metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
+            return null
+          }
+          metrics.cacheHits.inc({ layer: 'l2' })
+          span.setAttribute('cache.result', 'l2_hit')
+          log.debug({ id }, 'cache.l2.hit')
+          this.writeL1(id, data)
+          metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
+          return data
+        } catch (err) {
+          span.setStatus({ code: SpanStatusCode.ERROR })
+          log.warn({ id, err }, 'cache.l2.get.error')
+          metrics.cacheOperationDuration.observe({ operation: 'get' }, Date.now() - opStart)
+          return null
+        }
+      } finally {
+        span.end()
       }
-      logger.debug({ id }, 'cache.l2.hit')
-      this.writeL1(id, data)
-      return data
-    } catch (err) {
-      logger.warn({ id, err }, 'cache.l2.get.error')
-      return null
-    }
+    })
   }
 
   async setProduct(id: string, data: ProductResponseItem): Promise<void> {
+    const log = getLogger()
     this.writeL1(id, data)
     try {
       await this.redis.set(`product:${id}`, JSON.stringify(data), 'EX', jitteredTtlSec())
     } catch (err) {
-      logger.warn({ id, err }, 'cache.l2.set.error')
+      log.warn({ id, err }, 'cache.l2.set.error')
     }
   }
 
@@ -97,16 +124,18 @@ export class ProductCacheService implements IProductCacheUpdater {
   }
 
   async getRedisIds(): Promise<string[] | null> {
+    const log = getLogger()
     try {
       const ids = await this.redis.zrevrange('products:sorted', 0, -1)
       return ids.length ? ids : null
     } catch (err) {
-      logger.warn({ err }, 'cache.l2.getids.error')
+      log.warn({ err }, 'cache.l2.getids.error')
       return null
     }
   }
 
   async setRedisIds(products: Array<{ id: string; score: number }>): Promise<void> {
+    const log = getLogger()
     if (!products.length) return
     try {
       const pipeline = this.redis.pipeline()
@@ -116,24 +145,26 @@ export class ProductCacheService implements IProductCacheUpdater {
       pipeline.pexpire('products:sorted', jitteredTtlMs())
       await pipeline.exec()
     } catch (err) {
-      logger.warn({ err }, 'cache.l2.setids.error')
+      log.warn({ err }, 'cache.l2.setids.error')
     }
   }
 
   async addToSortedSet(id: string, score: number): Promise<void> {
+    const log = getLogger()
     try {
       await this.redis.zadd('products:sorted', score, id)
     } catch (err) {
-      logger.warn({ id, err }, 'cache.l2.zadd.error')
+      log.warn({ id, err }, 'cache.l2.zadd.error')
     }
   }
 
   async getTotal(): Promise<number | null> {
+    const log = getLogger()
     try {
       const count = await this.redis.zcard('products:sorted')
       return count > 0 ? count : null
     } catch (err) {
-      logger.warn({ err }, 'cache.l2.total.error')
+      log.warn({ err }, 'cache.l2.total.error')
       return null
     }
   }

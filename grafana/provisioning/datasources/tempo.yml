@@ -1,0 +1,10 @@
+apiVersion: 1
+datasources:
+  - name: Tempo
+    type: tempo
+    uid: tempo
+    url: http://tempo:3200
+    jsonData:
+      httpMethod: GET
+      lokiSearch:
+        datasourceUid: loki

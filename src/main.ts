@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+import { initTracer, shutdownTracer } from '@shared/observability/tracer'
 import { registerSharedInfra } from '@shared/container'
 import { registerCatalogModule } from '@modules/catalog/container'
 import { registerErpAdapterModule } from '@modules/erp-adapter/container'
@@ -14,6 +15,8 @@ import { container } from 'tsyringe'
 import Redis from 'ioredis'
 
 async function bootstrap(): Promise<void> {
+  initTracer()
+
   const redisUrl = new URL(process.env.REDIS_URL ?? 'redis://localhost:6379')
   const redis = new Redis({ host: redisUrl.hostname, port: Number(redisUrl.port) || 6379, maxRetriesPerRequest: null })
 
@@ -40,6 +43,11 @@ async function bootstrap(): Promise<void> {
   const checkoutWorker = container.resolve(BullMQCheckoutWorker)
   checkoutRelay.start()
   checkoutWorker.start()
+
+  process.on('SIGTERM', async () => {
+    await shutdownTracer()
+    process.exit(0)
+  })
 }
 
 bootstrap().catch((err) => {

@@ -4,7 +4,10 @@ import type { ProcessCheckoutJobUseCase } from '../../use-cases/process-checkout
 import type { ICheckoutOutboxRepository } from '../../repositories/checkout-outbox-repository'
 import type { IOrderRepository } from '../../repositories/order-repository'
 import { OrderStatus } from '../../domain/value-objects/order-status'
-import { logger } from '@shared/observability/logger'
+import { getLogger } from '@shared/observability/logger'
+import { tracer, SpanStatusCode } from '@shared/observability/tracer'
+import { enterContext } from '@shared/observability/context'
+import { metrics } from '@shared/observability/metrics'
 
 interface CheckoutJobPayload {
   orderId: string
@@ -27,45 +30,59 @@ export class BullMQCheckoutWorker {
       'checkout-processing',
       async (job) => {
         const { orderId } = job.data
-        logger.debug({ jobId: job.id, orderId, attempt: job.attemptsMade }, 'checkout.job.start')
+        enterContext({ correlationId: job.id ?? orderId, orderId })
 
-        // Set PROCESSING before ERP simulation
-        const order = await this.orderRepository.findById(orderId)
-        if (order) {
-          await this.orderRepository.updateStatus(orderId, OrderStatus.PROCESSING)
-        }
+        return tracer.startActiveSpan('checkout.process.job', {
+          attributes: {
+            'order.id': orderId,
+            'messaging.bullmq.job_id': job.id ?? '',
+            'messaging.bullmq.attempts': job.attemptsMade,
+          },
+        }, async (span) => {
+          const log = getLogger()
+          const jobStart = Date.now()
+          try {
+            log.debug({ jobId: job.id, orderId, attempt: job.attemptsMade }, 'checkout.job.start')
 
-        // Mock ERP simulation with delays
-        await delay(1000) // step 1: ERP validation
-        await delay(1000) // step 2: ERP reservation
-        await delay(1000) // step 3: ERP billing
+            const order = await this.orderRepository.findById(orderId)
+            if (order) {
+              await this.orderRepository.updateStatus(orderId, OrderStatus.PROCESSING)
+            }
 
-        const result = await this.processUseCase.execute({ orderId })
-        if (result.isFailure()) throw new Error(result.value.message)
+            await delay(1000)
+            await delay(1000)
+            await delay(1000)
 
-        // Mark outbox PROCESSED — job.id equals outbox entry id (set by relay)
-        if (job.id) await this.outboxRepository.markProcessed(job.id)
+            const result = await this.processUseCase.execute({ orderId })
+            if (result.isFailure()) throw new Error(result.value.message)
 
-        logger.info({ jobId: job.id, orderId }, 'checkout.job.confirmed')
+            if (job.id) await this.outboxRepository.markProcessed(job.id)
+
+            metrics.checkoutConfirmed.inc()
+            metrics.checkoutJobDuration.observe(Date.now() - jobStart)
+            span.setStatus({ code: SpanStatusCode.OK })
+            log.info({ jobId: job.id, orderId }, 'checkout.job.confirmed')
+          } catch (err) {
+            span.setStatus({ code: SpanStatusCode.ERROR, message: (err as Error).message })
+            throw err
+          } finally {
+            span.end()
+          }
+        })
       },
       { connection: this.redisConnection },
     )
 
     this.worker.on('failed', async (job, err) => {
       if (!job) return
+      const log = getLogger()
       const maxAttempts = Number(job.opts.attempts ?? 3)
       if (job.attemptsMade >= maxAttempts) {
         const { orderId } = job.data
         await this.processUseCase.handleFinalFailure(orderId, err.message)
-
-        // Mark outbox DEAD — fetch outbox entry by orderId
-        // Use findPending filtered by orderId; ENQUEUED entries won't show in pending
-        // Fetch from DB directly via outbox repo is safer:
-        // For simplicity, markDead is called with the job ID as the outbox ID
-        // (jobId == outbox entry id, set in relay via { jobId: entry.id })
         if (job.id) await this.outboxRepository.markDead(job.id, err.message)
-
-        logger.error(
+        metrics.checkoutFailed.inc({ permanent: 'true' })
+        log.error(
           { jobId: job.id, orderId, totalAttempts: job.attemptsMade, finalError: err.message },
           'checkout.job.dead',
         )
@@ -73,7 +90,8 @@ export class BullMQCheckoutWorker {
         await this.orderRepository.updateStatus(job.data.orderId, OrderStatus.FAILED, {
           lastError: err.message,
         })
-        logger.warn(
+        metrics.checkoutFailed.inc({ permanent: 'false' })
+        log.warn(
           { jobId: job.id, orderId: job.data.orderId, attempt: job.attemptsMade, error: err.message },
           'checkout.job.retry',
         )
