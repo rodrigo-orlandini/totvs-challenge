@@ -61,6 +61,16 @@
       ],
       "title": "Recent Errors",
       "type": "logs"
+    },
+    {
+      "gridPos": { "h": 4, "w": 24, "x": 0, "y": 16 },
+      "id": 5,
+      "options": {
+        "content": "## Runbook\n\nSee [docs/observability.md](../docs/observability.md) for spans reference, metrics table, alert examples, and the checkout troubleshooting runbook.",
+        "mode": "markdown"
+      },
+      "title": "Runbook",
+      "type": "text"
     }
   ],
   "refresh": "30s",
