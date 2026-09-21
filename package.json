@@ -19,7 +19,7 @@
     "db:migrate:erp": "DATABASE_URL=$ERP_DATABASE_URL prisma migrate deploy",
     "db:generate": "prisma generate",
     "db:seed": "node prisma/seed.mjs",
-    "db:seed:erp": "ERP_DATABASE_URL=postgresql://postgres:postgres@localhost:5434/casecellshop_erp node prisma/seed.mjs --target erp",
+    "db:seed:erp": "node prisma/seed.mjs --target erp",
     "db:studio": "prisma studio"
   },
   "dependencies": {
