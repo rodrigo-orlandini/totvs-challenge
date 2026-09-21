@@ -11,6 +11,8 @@ import { InsufficientStockError } from '../../errors/insufficient-stock-error'
 import { ProductNotFoundError } from '../../errors/product-not-found-error'
 import type { CreateCheckoutInput, CreateCheckoutOutput } from '../../dtos/checkout-dto'
 import { OrderStatus } from '../../domain/value-objects/order-status'
+import { tracer, SpanStatusCode } from '@shared/observability/tracer'
+import { metrics } from '@shared/observability/metrics'
 
 const RESERVATION_TTL_MS = 10 * 60 * 1000
 
@@ -24,38 +26,55 @@ export class CreateCheckoutUseCase {
   ) {}
 
   async execute(input: CreateCheckoutInput): Promise<Either<DomainError, CreateCheckoutOutput>> {
-    const existing = await this.orderRepository.findByIdempotencyKey(input.idempotencyKey)
-    if (existing) {
-      return right({ orderId: existing.id, status: existing.status, createdAt: existing.createdAt })
-    }
+    return tracer.startActiveSpan('checkout.create', async (span) => {
+      try {
+        span.setAttribute('customer.id', input.customerId)
+        span.setAttribute('checkout.items_count', input.items.length)
 
-    for (const item of input.items) {
-      const stock = await this.productStockChecker.getProductStock(item.productId)
-      if (!stock.exists) return left(new ProductNotFoundError(item.productId))
-      const activeReserved = await this.stockReservationRepository.getActiveQuantity(item.productId)
-      const available = stock.availableQuantity - activeReserved
-      if (available < item.quantity) {
-        return left(new InsufficientStockError(item.productId, item.quantity, available))
+        const existing = await this.orderRepository.findByIdempotencyKey(input.idempotencyKey)
+        if (existing) {
+          span.setAttribute('checkout.idempotent_hit', true)
+          return right({ orderId: existing.id, status: existing.status, createdAt: existing.createdAt })
+        }
+
+        for (const item of input.items) {
+          const stock = await this.productStockChecker.getProductStock(item.productId)
+          if (!stock.exists) {
+            span.setStatus({ code: SpanStatusCode.ERROR, message: 'product_not_found' })
+            return left(new ProductNotFoundError(item.productId))
+          }
+          const activeReserved = await this.stockReservationRepository.getActiveQuantity(item.productId)
+          const available = stock.availableQuantity - activeReserved
+          if (available < item.quantity) {
+            span.setStatus({ code: SpanStatusCode.ERROR, message: 'insufficient_stock' })
+            return left(new InsufficientStockError(item.productId, item.quantity, available))
+          }
+        }
+
+        const orderId = randomUUID()
+        const expiresAt = new Date(Date.now() + RESERVATION_TTL_MS)
+
+        const order = await this.orderRepository.createWithReservationsAndOutbox({
+          id: orderId,
+          customerId: input.customerId,
+          correlationId: input.correlationId ?? randomUUID(),
+          idempotencyKey: input.idempotencyKey,
+          items: input.items,
+          reservations: input.items.map(i => ({
+            id: randomUUID(),
+            productId: i.productId,
+            quantity: i.quantity,
+            expiresAt,
+          })),
+        })
+
+        span.setAttribute('order.id', order.id)
+        metrics.checkoutCreated.inc()
+
+        return right({ orderId: order.id, status: OrderStatus.PENDING, createdAt: order.createdAt })
+      } finally {
+        span.end()
       }
-    }
-
-    const orderId = randomUUID()
-    const expiresAt = new Date(Date.now() + RESERVATION_TTL_MS)
-
-    const order = await this.orderRepository.createWithReservationsAndOutbox({
-      id: orderId,
-      customerId: input.customerId,
-      correlationId: input.correlationId ?? randomUUID(),
-      idempotencyKey: input.idempotencyKey,
-      items: input.items,
-      reservations: input.items.map(i => ({
-        id: randomUUID(),
-        productId: i.productId,
-        quantity: i.quantity,
-        expiresAt,
-      })),
     })
-
-    return right({ orderId: order.id, status: OrderStatus.PENDING, createdAt: order.createdAt })
   }
 }
