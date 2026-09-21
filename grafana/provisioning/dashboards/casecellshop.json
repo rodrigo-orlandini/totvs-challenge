@@ -1,0 +1,74 @@
+{
+  "__inputs": [],
+  "__requires": [],
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": {
+        "defaults": { "unit": "percentunit" },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "options": { "tooltip": { "mode": "single" } },
+      "targets": [
+        {
+          "expr": "rate(cache_hits_total[5m]) / (rate(cache_hits_total[5m]) + rate(cache_misses_total[5m]))",
+          "legendFormat": "Hit Rate"
+        }
+      ],
+      "title": "Cache Hit Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": {}, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "targets": [
+        { "expr": "increase(checkout_orders_created_total[1m])", "legendFormat": "Created" },
+        { "expr": "increase(checkout_orders_confirmed_total[1m])", "legendFormat": "Confirmed" },
+        { "expr": "increase(checkout_orders_failed_total[1m])", "legendFormat": "Failed" }
+      ],
+      "title": "Checkout Funnel (1m rate)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "ms" }, "overrides": [] },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "id": 3,
+      "targets": [
+        { "expr": "histogram_quantile(0.95, rate(checkout_job_duration_ms_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.50, rate(checkout_job_duration_ms_bucket[5m]))", "legendFormat": "p50" }
+      ],
+      "title": "Job Duration",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "loki", "uid": "loki" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "id": 4,
+      "options": { "dedupStrategy": "none", "showTime": true },
+      "targets": [
+        { "expr": "{app=\"casecellshop\"} | json | level=\"error\"", "legendFormat": "" }
+      ],
+      "title": "Recent Errors",
+      "type": "logs"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 38,
+  "tags": ["casecellshop"],
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "title": "CaseCellShop Observability",
+  "uid": "casecellshop-obs",
+  "version": 1
+}
