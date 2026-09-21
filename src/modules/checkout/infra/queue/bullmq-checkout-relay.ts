@@ -1,7 +1,8 @@
 import { Queue } from 'bullmq'
 import type { Redis } from 'ioredis'
 import type { ICheckoutOutboxRepository } from '../../repositories/checkout-outbox-repository'
-import { logger } from '@shared/observability/logger'
+import { getLogger } from '@shared/observability/logger'
+import { metrics } from '@shared/observability/metrics'
 
 interface CheckoutJobPayload {
   orderId: string
@@ -36,6 +37,8 @@ export class BullMQCheckoutRelay {
   }
 
   private async relayBatch(): Promise<void> {
+    const log = getLogger()
+    metrics.relayCycles.inc()
     try {
       const pending = await this.outboxRepository.findPending()
       if (pending.length === 0) return
@@ -47,9 +50,10 @@ export class BullMQCheckoutRelay {
       )
 
       await Promise.all(pending.map(entry => this.outboxRepository.markEnqueued(entry.id)))
-      logger.info({ count: pending.length }, 'checkout.relay.batch')
+      metrics.relayEnqueued.inc(pending.length)
+      log.info({ count: pending.length }, 'checkout.relay.batch')
     } catch (err) {
-      logger.error({ err }, 'checkout.relay.batch.error')
+      log.error({ err }, 'checkout.relay.batch.error')
     }
   }
 }
