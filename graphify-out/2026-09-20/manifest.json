@@ -360,15 +360,15 @@
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/process-sync-job/process-sync-job.spec.ts": {
-    "mtime": 1789948936.8100488,
-    "seen": 1789948959.3522367,
-    "ast_hash": "7c6c3ca3cd517d7bc2b8211ccffa7f99",
+    "mtime": 1789950128.2057116,
+    "seen": 1789950201.3479161,
+    "ast_hash": "c601dd8778071694eab280a63e1fe637",
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/use-cases/process-sync-job/process-sync-job.ts": {
-    "mtime": 1789948908.8152955,
-    "seen": 1789948959.3522367,
-    "ast_hash": "6fd9804d2a9f7eda21b6739bbb677f2b",
+    "mtime": 1789950082.4310431,
+    "seen": 1789950201.3479161,
+    "ast_hash": "a4e332855bc2241d61df64baad6dcb6a",
     "semantic_hash": ""
   },
   "src/shared/container.ts": {
@@ -612,21 +612,21 @@
     "semantic_hash": ""
   },
   "src/modules/catalog/cache/product-cache-service.spec.ts": {
-    "mtime": 1789948382.243801,
-    "seen": 1789948395.217354,
-    "ast_hash": "60a92dd9d7017df87874757b62ff7285",
+    "mtime": 1789950142.9120004,
+    "seen": 1789950201.3479161,
+    "ast_hash": "996ecb2a202379d312b003bea7a0a902",
     "semantic_hash": ""
   },
   "src/modules/catalog/cache/product-cache-service.ts": {
-    "mtime": 1789948140.3844488,
-    "seen": 1789948204.5964224,
-    "ast_hash": "ff88ec70fb993d0c61fb55a45ac24b25",
+    "mtime": 1789950111.9859471,
+    "seen": 1789950201.3479161,
+    "ast_hash": "3e3f1c09b10c13beae1c25b98c4b6313",
     "semantic_hash": ""
   },
   "src/modules/erp-adapter/repositories/product-cache-updater.ts": {
-    "mtime": 1789948124.9529607,
-    "seen": 1789948204.5964224,
-    "ast_hash": "63db3a9c650aa832b458f011466c488a",
+    "mtime": 1789950079.0094914,
+    "seen": 1789950201.3479161,
+    "ast_hash": "d6daae163859d8d473c2b084fd77753a",
     "semantic_hash": ""
   },
   "docs/superpowers/plans/2026-09-20-cache-vitrine.md": {
@@ -636,9 +636,9 @@
     "semantic_hash": ""
   },
   "src/modules/catalog/infra/persistence/cached-product-repository.spec.ts": {
-    "mtime": 1789948666.7236588,
-    "seen": 1789948697.0310426,
-    "ast_hash": "5ed10b7727aed279d1ba95468ae36156",
+    "mtime": 1789950229.8985586,
+    "seen": 1789950243.7818463,
+    "ast_hash": "e352271d83aa0252fac60f5f1daa37e7",
     "semantic_hash": ""
   },
   "src/modules/catalog/infra/persistence/cached-product-repository.ts": {
@@ -648,15 +648,15 @@
     "semantic_hash": ""
   },
   "src/modules/catalog/cache/cache-refresh-scheduler.spec.ts": {
-    "mtime": 1789949253.5428014,
-    "seen": 1789949269.6992373,
-    "ast_hash": "b638588dfb5faee77e2518dbf2bb2e41",
+    "mtime": 1789950155.8429675,
+    "seen": 1789950201.3479161,
+    "ast_hash": "c921e081a1d2cde50d63aa347adca50a",
     "semantic_hash": ""
   },
   "src/modules/catalog/cache/cache-refresh-scheduler.ts": {
-    "mtime": 1789949111.7563016,
-    "seen": 1789949269.6992373,
-    "ast_hash": "164255f4537484633729fb76261f2770",
+    "mtime": 1789950120.6941085,
+    "seen": 1789950201.3479161,
+    "ast_hash": "8cfd321954378764569174d319e8c9af",
     "semantic_hash": ""
   }
 }

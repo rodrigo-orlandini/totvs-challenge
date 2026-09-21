@@ -24,9 +24,9 @@
     "semantic_hash": ""
   },
   "src/infra/http/server.ts": {
-    "mtime": 1789941026.8461082,
-    "seen": 1789943509.0228164,
-    "ast_hash": "022d11fcc7265409aae19dd79da09f3b",
+    "mtime": 1789953787.3496752,
+    "seen": 1789953825.7274008,
+    "ast_hash": "12f12f2fbe1b6e1152e6a886e6b53d89",
     "semantic_hash": ""
   },
   "src/main.ts": {
@@ -84,9 +84,9 @@
     "semantic_hash": ""
   },
   "src/modules/catalog/infra/http/product-controller.ts": {
-    "mtime": 1789941026.8555694,
-    "seen": 1789943509.0228164,
-    "ast_hash": "0113e0dec0ed1c7d0c85655b84b4abae",
+    "mtime": 1789953796.7018428,
+    "seen": 1789953825.7274008,
+    "ast_hash": "08c9b5d096ad5f7bf2c1ed11538764ab",
     "semantic_hash": ""
   },
   "src/modules/catalog/infra/persistence/prisma-product-repository.integration-spec.ts": {
