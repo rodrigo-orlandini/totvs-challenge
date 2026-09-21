@@ -13,6 +13,8 @@ const HTTP_STATUS_MAP: Record<string, number> = {
   DUPLICATE_ORDER: 409,
   VALIDATION_ERROR: 422,
   ERP_UNAVAILABLE: 503,
+  INSUFFICIENT_STOCK: 409,
+  PRODUCT_NOT_FOUND: 404,
 }
 
 export function toHttpError(error: DomainError): HttpError {
