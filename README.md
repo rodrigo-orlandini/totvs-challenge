@@ -108,12 +108,9 @@ Ver seção [Observabilidade](#observabilidade) abaixo.
 
 ## Executando o projeto
 
-### Pré-requisitos
+Ver **[`docs/running.md`](./docs/running.md)** para guia completo com todos os passos, comandos Docker, stack de observabilidade e referência rápida.
 
-- Docker (ou Docker via WSL no Windows)
-- Node.js 20+
-
-### Subir infraestrutura + aplicação
+Resumo:
 
 ```bash
 cp .env.example .env
@@ -125,39 +122,7 @@ docker compose up
 wsl docker compose up
 ```
 
-A aplicação sobe em `http://localhost:3000`.
-
-### Subir stack de observabilidade (opcional)
-
-```bash
-# Docker Desktop
-docker compose -f docker-compose.observability.yml up -d
-
-# WSL
-wsl docker compose -f docker-compose.observability.yml up -d
-```
-
-| Serviço | URL |
-|---|---|
-| Grafana | http://localhost:3001 |
-| Prometheus | http://localhost:9090 |
-| Tempo | http://localhost:3200 |
-
-Para enviar traces para o Tempo, adicione ao `.env`:
-
-```env
-OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
-```
-
-Sem essa variável, o app usa `ConsoleSpanExporter` (traces no stdout).
-
-### Migrations e seed
-
-```bash
-# Dentro do container ou com banco acessível localmente
-npm run db:migrate
-npm run db:seed
-```
+A aplicação sobe em `http://localhost:3000`. Swagger disponível em `/docs`.
 
 ---
 
