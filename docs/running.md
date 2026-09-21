@@ -1,163 +1,135 @@
 # Como rodar o projeto
 
-Guia completo para subir o CaseCellShop localmente, com e sem stack de observabilidade.
-
 ## Pré-requisitos
 
 | Ferramenta | Versão mínima | Observação |
 |---|---|---|
-| Node.js | 20 | Somente para rodar testes locais fora do container |
-| Docker | qualquer recente | Motor obrigatório para infraestrutura |
+| Docker | qualquer recente | Motor obrigatório |
 | Docker Compose | v2 (`compose` plugin) | `docker compose` sem hífen |
+| Node.js | 20 | Só para testes fora do container |
 
-> **Windows sem Docker Desktop:** engine roda dentro do WSL (Ubuntu). Substitua `docker compose` por `wsl docker compose` em todos os comandos abaixo.
+> **Windows sem Docker Desktop:** engine roda dentro do WSL. Substitua `docker compose` por `wsl docker compose` em todos os comandos.
 
 ---
 
-## 1. Clonar e configurar variáveis de ambiente
+## Passo 1 — Clonar e configurar
 
 ```bash
 git clone https://github.com/rodrigo-orlandini/totvs-challenge.git
 cd totvs-challenge
-
 cp .env.example .env
 ```
 
-O `.env.example` já contém todos os valores corretos para rodar com o `docker-compose.yml` padrão. Nenhuma alteração é necessária para ambiente local.
+O `.env.example` já tem todos os valores corretos para ambiente local. Nenhuma alteração necessária.
 
 ---
 
-## 2. Subir infraestrutura e aplicação
+## Passo 2 — Subir os containers
 
 ```bash
-docker compose up
+docker compose up -d
 ```
 
-Isso sobe 4 containers:
+Sobe 4 containers em background:
 
-| Container | Imagem | Porta local |
-|---|---|---|
-| `casecellshop-app` | build local (Node.js 20) | `3000` |
-| `casecellshop-postgres` | postgres:16-alpine | `5432` |
-| `casecellshop-redis` | redis:7-alpine | `6379` |
-| `casecellshop-postgres-erp` | postgres:16-alpine | `5434` |
+| Container | Porta local |
+|---|---|
+| `casecellshop-app` (Node.js) | `3000` |
+| `casecellshop-postgres` | `5432` |
+| `casecellshop-redis` | `6379` |
+| `casecellshop-postgres-erp` | `5434` |
 
-A aplicação aguarda o PostgreSQL e o Redis estarem saudáveis antes de iniciar (healthchecks configurados). O primeiro `up` pode demorar alguns minutos para baixar as imagens e compilar o TypeScript.
+O primeiro `up` baixa as imagens e compila o TypeScript — pode levar alguns minutos. Acompanhe com:
 
-> Para rodar em background: `docker compose up -d`  
-> Para acompanhar logs depois: `docker compose logs -f app`
+```bash
+docker compose logs -f app
+```
+
+Aguarde aparecer: `Server listening at http://0.0.0.0:3000`
 
 ---
 
-## 3. Executar migrations e seed
-
-As migrations **não rodam automaticamente** — é preciso executar manualmente após subir os containers.
-
-### Banco principal
-
-```bash
-docker compose exec app npm run db:migrate
-docker compose exec app npm run db:seed
-```
-
-### Banco ERP
-
-```bash
-docker compose exec app npm run db:migrate:erp
-docker compose exec app npm run db:seed:erp
-```
-
-> Os scripts usam `DATABASE_URL` e `ERP_DATABASE_URL` do `.env`, que já apontam para os hostnames corretos dentro da rede Docker (`casecellshop-postgres` e `casecellshop-postgres-erp`). Não é preciso sobrescrever nada.
-
-**Fora do container** (banco acessível via porta exposta em localhost): sobrescreva a variável na linha do comando:
+## Passo 3 — Aplicar migrations
 
 ```bash
 # Banco principal
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/casecellshop_dev npm run db:seed
+docker compose exec app npm run db:migrate
 
 # Banco ERP
-ERP_DATABASE_URL=postgresql://postgres:postgres@localhost:5434/casecellshop_erp node prisma/seed.mjs --target erp
+docker compose exec app npm run db:migrate:erp
 ```
 
 ---
 
-## 4. Verificar que tudo está no ar
+## Passo 4 — Popular dados iniciais
 
-| URL | O que é |
-|---|---|
-| `http://localhost:3000/docs` | Swagger UI — documentação interativa da API |
-| `http://localhost:3000/metrics` | Endpoint Prometheus (texto plano) |
-| `http://localhost:3000/admin/queues` | BullBoard — estado das filas BullMQ |
-| `http://localhost:3000/products` | Lista de produtos (retorna `[]` sem seed) |
+```bash
+# Banco principal
+docker compose exec app npm run db:seed
+
+# Banco ERP
+docker compose exec app npm run db:seed:erp
+```
 
 ---
 
-## 5. Rodar com stack de observabilidade (opcional)
+## Passo 5 — Verificar
 
-Sobe Prometheus, Grafana, Loki, Promtail e Tempo em paralelo à aplicação:
+| URL | O que é |
+|---|---|
+| `http://localhost:3000/products` | Lista de produtos (deve retornar dados do seed) |
+| `http://localhost:3000/docs` | Swagger UI — documentação interativa da API |
+| `http://localhost:3000/admin/queues` | BullBoard — estado das filas BullMQ |
+| `http://localhost:3000/metrics` | Métricas Prometheus |
+
+---
+
+## Observabilidade (opcional)
+
+Para subir Prometheus, Grafana, Loki e Tempo:
 
 ```bash
 docker compose -f docker-compose.observability.yml up -d
 ```
 
-Para enviar traces da aplicação para o Tempo, adicione ao `.env`:
+Para enviar traces para o Tempo, adicione ao `.env` e reinicie o app:
 
 ```env
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
 ```
 
-Depois reinicie o container da aplicação:
-
 ```bash
 docker compose restart app
 ```
-
-Serviços disponíveis:
 
 | Serviço | URL | Credenciais |
 |---|---|---|
 | Grafana | `http://localhost:3001` | `admin` / `admin` |
 | Prometheus | `http://localhost:9090` | — |
 | Tempo | `http://localhost:3200` | — |
-| Loki | `http://localhost:3100` | — |
 
-O Grafana já vem com datasources (Prometheus, Loki, Tempo) e dashboard provisionados automaticamente. Acesse **Dashboards → CaseCellShop** para ver os painéis.
-
-Sem `OTEL_EXPORTER_OTLP_ENDPOINT` configurado, o app usa `ConsoleSpanExporter`: traces aparecem no stdout do container, não no Tempo.
+O Grafana já vem com datasources e dashboard provisionados. Acesse **Dashboards → CaseCellShop**.
 
 ---
 
-## 6. Rodar os testes
+## Testes
 
-### Testes unitários (sem Docker)
+### Unitários (sem Docker)
 
 ```bash
 npm install
 npm run test:unit
 ```
 
-### Testes de integração (requer Docker)
-
-Sobe containers de teste isolados (portas diferentes da infra principal):
+### Integração (requer Docker)
 
 ```bash
-# Docker Desktop
-npm run test:integration
-
-# WSL
-wsl docker compose -f docker-compose.test.yml up -d
 npm run test:integration
 ```
 
-Containers de teste:
+Sobe containers isolados nas portas `5433`, `6380` e `5435`.
 
-| Container | Porta local |
-|---|---|
-| `casecellshop-postgres-test` | `5433` |
-| `casecellshop-redis-test` | `6380` |
-| `casecellshop-postgres-erp-test` | `5435` |
-
-### Todos os testes + coverage
+### Todos + coverage
 
 ```bash
 npm run test:all
@@ -165,42 +137,15 @@ npm run test:all
 
 ---
 
-## 7. Parar tudo
+## Parar tudo
 
 ```bash
-# Parar aplicação + infra
+# App + infra
 docker compose down
 
-# Parar observabilidade
+# Observabilidade
 docker compose -f docker-compose.observability.yml down
 
-# Remover volumes (dados do banco)
+# Remover volumes (apaga dados do banco)
 docker compose down -v
-```
-
----
-
-## Referência rápida de comandos
-
-```bash
-# Subir tudo (app + infra)
-docker compose up
-
-# Subir com observabilidade
-docker compose up & docker compose -f docker-compose.observability.yml up -d
-
-# Logs da aplicação
-docker compose logs -f app
-
-# Acessar banco via psql
-docker compose exec postgres psql -U postgres -d casecellshop_dev
-
-# Acessar Redis CLI
-docker compose exec redis redis-cli
-
-# Rodar testes unitários
-npm run test:unit
-
-# Type check
-npm run typecheck
 ```
