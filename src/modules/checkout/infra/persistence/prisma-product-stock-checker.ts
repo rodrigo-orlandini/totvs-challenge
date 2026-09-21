@@ -13,12 +13,7 @@ export class PrismaProductStockChecker implements IProductStockChecker {
       where: { productId },
     })
 
-    const activeReserved = await this.prisma.stockReservation.aggregate({
-      _sum: { quantity: true },
-      where: { productId, expiresAt: { gt: new Date() }, releasedAt: null },
-    })
-
-    const available = (stockTotal._sum.quantity ?? 0) - (activeReserved._sum.quantity ?? 0)
-    return { exists: true, availableQuantity: Math.max(0, available) }
+    const grossStock = stockTotal._sum.quantity ?? 0
+    return { exists: true, availableQuantity: Math.max(0, grossStock) }
   }
 }

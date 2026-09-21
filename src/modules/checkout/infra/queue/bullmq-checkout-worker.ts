@@ -29,12 +29,10 @@ export class BullMQCheckoutWorker {
         const { orderId } = job.data
         logger.debug({ jobId: job.id, orderId, attempt: job.attemptsMade }, 'checkout.job.start')
 
-        // Increment attempts + set PROCESSING before ERP simulation
+        // Set PROCESSING before ERP simulation
         const order = await this.orderRepository.findById(orderId)
         if (order) {
-          await this.orderRepository.updateStatus(orderId, OrderStatus.PROCESSING, {
-            attempts: (order.attempts ?? 0) + 1,
-          })
+          await this.orderRepository.updateStatus(orderId, OrderStatus.PROCESSING)
         }
 
         // Mock ERP simulation with delays
@@ -45,10 +43,8 @@ export class BullMQCheckoutWorker {
         const result = await this.processUseCase.execute({ orderId })
         if (result.isFailure()) throw new Error(result.value.message)
 
-        // Mark outbox PROCESSED
-        const outbox = await this.outboxRepository.findPending()
-        const entry = outbox.find(e => e.orderId === orderId)
-        if (entry) await this.outboxRepository.markProcessed(entry.id)
+        // Mark outbox PROCESSED — job.id equals outbox entry id (set by relay)
+        if (job.id) await this.outboxRepository.markProcessed(job.id)
 
         logger.info({ jobId: job.id, orderId }, 'checkout.job.confirmed')
       },
@@ -74,6 +70,9 @@ export class BullMQCheckoutWorker {
           'checkout.job.dead',
         )
       } else {
+        await this.orderRepository.updateStatus(job.data.orderId, OrderStatus.FAILED, {
+          lastError: err.message,
+        })
         logger.warn(
           { jobId: job.id, orderId: job.data.orderId, attempt: job.attemptsMade, error: err.message },
           'checkout.job.retry',

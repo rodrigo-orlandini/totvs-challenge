@@ -26,6 +26,8 @@ export class ProcessCheckoutJobUseCase {
     const order = await this.orderRepository.findById(input.orderId)
     if (!order) return left(new OrderNotFoundError(input.orderId))
 
+    if (order.status === OrderStatus.CONFIRMED) return right(undefined)
+
     await this.orderRepository.updateStatus(input.orderId, OrderStatus.CONFIRMED, {
       attempts: order.attempts + 1,
     })
