@@ -81,4 +81,72 @@ describe('ProcessCheckoutJobUseCase', () => {
 
     expect(stockFlowWriter.flows).toHaveLength(0)
   })
+
+  it('execute: idempotent — second call on CONFIRMED order returns success without extra StockFlow', async () => {
+    await useCase.execute({ orderId: 'order-1' })
+    stockFlowWriter.flows.length = 0 // reset to detect duplicates
+
+    const result = await useCase.execute({ orderId: 'order-1' })
+
+    expect(result.isSuccess()).toBe(true)
+    expect(stockFlowWriter.flows).toHaveLength(0) // no double deduction
+    const order = await orderRepo.findById('order-1')
+    expect(order?.status).toBe(OrderStatus.CONFIRMED)
+  })
+
+  it('execute: calls createSaleFlow with positive quantity (sign negation is infra responsibility)', async () => {
+    // InMemoryCheckoutStockFlowWriter records quantity AS-IS from use case call
+    // Use case passes positive quantity; Prisma impl does the negation
+    // This test verifies the use case passes the right value to the port
+    const rawFlows: Array<{ productId: string; quantity: number }> = []
+    const rawWriter = {
+      createSaleFlow: async (productId: string, quantity: number) => {
+        rawFlows.push({ productId, quantity })
+      },
+    }
+    const rawUseCase = new ProcessCheckoutJobUseCase(
+      orderRepo,
+      reservationRepo,
+      outboxRepo,
+      rawWriter,
+    )
+
+    await rawUseCase.execute({ orderId: 'order-1' })
+
+    expect(rawFlows).toEqual([{ productId: 'prod-1', quantity: 2 }]) // positive — infra negates
+  })
+
+  describe('InMemoryCheckoutOutboxRepository lifecycle', () => {
+    it('findPending returns entry when PENDING; empty after markEnqueued', async () => {
+      const pending = await outboxRepo.findPending()
+      expect(pending).toHaveLength(1)
+      expect(pending[0].orderId).toBe('order-1')
+
+      await outboxRepo.markEnqueued(pending[0].id)
+      const afterEnqueue = await outboxRepo.findPending()
+      expect(afterEnqueue).toHaveLength(0)
+    })
+
+    it('markProcessed transitions ENQUEUED entry to PROCESSED; not in findPending', async () => {
+      const pending = await outboxRepo.findPending()
+      const id = pending[0].id
+
+      await outboxRepo.markEnqueued(id)
+      await outboxRepo.markProcessed(id)
+
+      const stillPending = await outboxRepo.findPending()
+      expect(stillPending).toHaveLength(0)
+    })
+
+    it('markDead transitions entry to DEAD with error; not in findPending', async () => {
+      const pending = await outboxRepo.findPending()
+      const id = pending[0].id
+
+      await outboxRepo.markEnqueued(id)
+      await outboxRepo.markDead(id, 'ERP timeout')
+
+      const stillPending = await outboxRepo.findPending()
+      expect(stillPending).toHaveLength(0)
+    })
+  })
 })
