@@ -37,6 +37,14 @@ export class OrderStatusController {
                 updatedAt: { type: 'string', format: 'date-time' },
               },
             },
+            404: {
+              type: 'object',
+              properties: {
+                statusCode: { type: 'integer' },
+                error: { type: 'string' },
+                message: { type: 'string' },
+              },
+            },
           },
         },
       },
