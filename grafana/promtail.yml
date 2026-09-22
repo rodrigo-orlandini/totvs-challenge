@@ -14,9 +14,10 @@ scrape_configs:
         refresh_interval: 5s
         filters:
           - name: name
-            values: ["totvs-app-1", "app"]
+            values: ["casecellshop-app"]
     relabel_configs:
       - source_labels: [__meta_docker_container_name]
+        regex: '/?(.*)'
         target_label: container
       - replacement: casecellshop
         target_label: app

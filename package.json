@@ -19,12 +19,12 @@
     "db:migrate:erp": "DATABASE_URL=$ERP_DATABASE_URL prisma migrate deploy",
     "db:generate": "prisma generate",
     "db:seed": "node prisma/seed.mjs",
-    "db:seed:erp": "ERP_DATABASE_URL=postgresql://postgres:postgres@localhost:5434/casecellshop_erp node prisma/seed.mjs --target erp",
+    "db:seed:erp": "node prisma/seed.mjs --target erp",
     "db:studio": "prisma studio"
   },
   "dependencies": {
-    "@bull-board/api": "^9.10.1",
-    "@bull-board/fastify": "^9.10.1",
+    "@bull-board/api": "^5.23.0",
+    "@bull-board/fastify": "^5.23.0",
     "@fastify/swagger": "^8.0.0",
     "@fastify/swagger-ui": "^3.0.0",
     "@opentelemetry/api": "^1.9.1",

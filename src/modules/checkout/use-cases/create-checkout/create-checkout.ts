@@ -54,19 +54,28 @@ export class CreateCheckoutUseCase {
         const orderId = randomUUID()
         const expiresAt = new Date(Date.now() + RESERVATION_TTL_MS)
 
-        const order = await this.orderRepository.createWithReservationsAndOutbox({
-          id: orderId,
-          customerId: input.customerId,
-          correlationId: input.correlationId ?? randomUUID(),
-          idempotencyKey: input.idempotencyKey,
-          items: input.items,
-          reservations: input.items.map(i => ({
-            id: randomUUID(),
-            productId: i.productId,
-            quantity: i.quantity,
-            expiresAt,
-          })),
-        })
+        let order
+        try {
+          order = await this.orderRepository.createWithReservationsAndOutbox({
+            id: orderId,
+            customerId: input.customerId,
+            correlationId: input.correlationId ?? randomUUID(),
+            idempotencyKey: input.idempotencyKey,
+            items: input.items,
+            reservations: input.items.map(i => ({
+              id: randomUUID(),
+              productId: i.productId,
+              quantity: i.quantity,
+              expiresAt,
+            })),
+          })
+        } catch (err) {
+          if (err instanceof InsufficientStockError) {
+            span.setStatus({ code: SpanStatusCode.ERROR, message: 'insufficient_stock' })
+            return left(err)
+          }
+          throw err
+        }
 
         span.setAttribute('order.id', order.id)
         metrics.checkoutCreated.inc()

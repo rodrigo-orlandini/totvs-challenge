@@ -45,16 +45,16 @@ export class ProcessSyncJobUseCase
           sku: payload.sku as string,
           name: payload.name as string,
           price: payload.price as number,
-          updatedAt: new Date(payload.updated_at as string),
+          updatedAt: new Date((payload.updatedAt ?? payload.updated_at) as string),
         })
       }
 
       if (entity === 'stock_flow') {
         await this.stockFlowRepo.createIfNotExists({
           id: payload.id as string,
-          productId: payload.product_id as string,
+          productId: (payload.productId ?? payload.product_id) as string,
           quantity: payload.quantity as number,
-          movedAt: new Date(payload.moved_at as string),
+          movedAt: new Date((payload.movedAt ?? payload.moved_at) as string),
         })
       }
 
@@ -78,8 +78,8 @@ export class ProcessSyncJobUseCase
             sku: payload.sku as string,
             name: payload.name as string,
             price: payload.price as number,
-            createdAt: new Date((payload.created_at ?? payload.updated_at) as string),
-            updatedAt: new Date(payload.updated_at as string),
+            createdAt: new Date((payload.createdAt ?? payload.created_at ?? payload.updatedAt ?? payload.updated_at) as string),
+            updatedAt: new Date((payload.updatedAt ?? payload.updated_at) as string),
           })
         } catch (cacheErr) {
           logger.warn({ correlationId, entity, erpId, err: cacheErr }, 'erp.sync.cache.update.warn')
@@ -89,7 +89,7 @@ export class ProcessSyncJobUseCase
       if (entity === 'stock_flow') {
         try {
           await this.cacheUpdater.updateAvailableQuantity(
-            payload.product_id as string,
+            (payload.productId ?? payload.product_id) as string,
             payload.quantity as number,
           )
         } catch (cacheErr) {
