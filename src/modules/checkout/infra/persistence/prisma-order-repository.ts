@@ -50,7 +50,7 @@ export class PrismaOrderRepository implements IOrderRepository {
         for (const productId of uniqueProductIds) {
           // Serialize concurrent stock checks per product at the DB level.
           // pg_advisory_xact_lock releases automatically when the transaction ends.
-          await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${productId})::bigint)`
+          await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${productId})::bigint)`
 
           const stockTotal = await tx.stockFlow.aggregate({
             _sum: { quantity: true },
