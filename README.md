@@ -2,6 +2,15 @@
 
 > As respostas para o teste conceitual estão em [`respostas-teste-conceitual.pdf`](./respostas-teste-conceitual.pdf).
 
+**Documentação:**
+- [Como rodar o projeto](./docs/running.md) — setup completo em 5 passos
+- [Testes manuais — Vitrine](./docs/testing-vitrine.md)
+- [Testes manuais — Checkout](./docs/testing-checkout.md)
+- [Testes manuais — Observabilidade](./docs/testing-observability.md)
+- [Observabilidade](./docs/observability.md) — spans, métricas, runbook
+
+---
+
 Sistema de e-commerce modular para venda de capinhas de celular, construído como monólito modular com arquitetura limpa.
 
 ## Stack
