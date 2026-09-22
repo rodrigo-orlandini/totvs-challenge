@@ -64,12 +64,18 @@ docker compose exec app npm run db:migrate:erp
 ## Passo 4 — Popular dados iniciais
 
 ```bash
-# Banco principal
-docker compose exec app npm run db:seed
-
-# Banco ERP
+# Seed apenas no banco ERP
 docker compose exec app npm run db:seed:erp
 ```
+
+O seed cria 100 produtos e stock_flows no banco ERP. O poller detecta as entradas e inicia a sincronização automaticamente via BullMQ (`erp-sync`). Aguarde o sync completar antes de acessar `GET /products`:
+
+```bash
+# Acompanhar fila — esperar waiting: 0 e active: 0
+docker compose logs -f app | Select-String "erp.sync"
+```
+
+Ou abrir `http://localhost:3000/admin/queues → erp-sync` e aguardar todos os jobs completarem.
 
 ---
 
@@ -95,7 +101,7 @@ docker compose -f docker-compose.observability.yml up -d
 Para enviar traces para o Tempo, adicione ao `.env` e reinicie o app:
 
 ```env
-OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
+OTEL_EXPORTER_OTLP_ENDPOINT=http://tempo:4318
 ```
 
 ```bash
@@ -104,7 +110,7 @@ docker compose restart app
 
 | Serviço | URL | Credenciais |
 |---|---|---|
-| Grafana | `http://localhost:3001` | `admin` / `admin` |
+| Grafana | `http://localhost:3001` | sem login (anonymous Admin) |
 | Prometheus | `http://localhost:9090` | — |
 | Tempo | `http://localhost:3200` | — |
 
